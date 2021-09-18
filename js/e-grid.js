@@ -6,7 +6,7 @@ Evema.Grid.Context = null;
 // TODO: Move grid-options to global options
 Evema.Grid.Options = {
     Standard: {
-        BackgroundColor: '#FFFFFF',
+        BackgroundColor: '#D3D1BB',
         LineColor: '#000000',
         CellWidth: 8,
         CellHeight: 8,
