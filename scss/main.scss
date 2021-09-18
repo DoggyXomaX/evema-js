@@ -2,7 +2,8 @@
 @import "_grid.scss";
 
 :root {
-    
+    --grid-x: -50%;
+    --grid-y: -50%;
 }
 
 html, body {
@@ -17,8 +18,9 @@ html, body {
 .grid-canvas {
     display: block;
     position: absolute;
+    border: Solid 8px white;
     top: 50%;
     left: 50%;
-    transform: translate( -50%, -50% );
+    transform: translate( var(--grid-x), var(--grid-y) );
     box-shadow: 0px 0px 32px #00000040;
 }
