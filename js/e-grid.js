@@ -2,6 +2,14 @@ Evema.Grid = {};
 
 Evema.Grid.Instance = null;
 
+Evema.Grid.Options = {
+    BackgroundColor: '#FFFFFF',
+    LineColor: '#000000',
+    CellWidth: 8,
+    CellHeight: 8,
+    Type: 'pixel'
+}
+
 Evema.Grid.Init = function() {
     let instance = document.getElementById( 'e-grid' );
 
