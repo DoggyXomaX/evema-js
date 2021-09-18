@@ -7,6 +7,8 @@ Evema.Grid.Options = {
     LineColor: '#000000',
     CellWidth: 8,
     CellHeight: 8,
+    Width: 100,
+    Height: 60,
     Type: 'pixel'
 }
 
