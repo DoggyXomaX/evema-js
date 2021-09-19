@@ -1,0 +1,21 @@
+:root {
+    --grid-x: 0px;
+    --grid-y: 0px;
+    --grid-background-color: #D3D1BB;
+}
+
+.grid-canvas {
+    display: block;
+    position: relative;
+
+    &-container {
+        display: block;
+        position: absolute;
+        padding: 4px;
+        top: calc( var( --grid-y ) + 50% );
+        left: calc( var( --grid-x ) + 50% );
+        transform: translate( -50%, -50% );
+        background-color: var( --grid-background-color );
+        box-shadow: 0px 0px 32px #00000040;
+    }
+}

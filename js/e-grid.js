@@ -66,8 +66,8 @@ Evema.Grid.Clear = function() {
     let context = Evema.Grid.Context;
     let options = Evema.Grid.Options;
     let backgroundColor = ( options.Current.BackgroundColor ? options.Current.BackgroundColor : options.Standard.BackgroundColor );
-    context.fillStyle = backgroundColor;
-    context.fillRect( 0, 0, instance.width, instance.height );
+    context.clearRect( 0, 0, instance.width, instance.height );
+    document.documentElement.style.setProperty( '--grid-background-color', backgroundColor );
 }
 
 Evema.Grid.Draw = function() {
