@@ -149,3 +149,11 @@ html, body {
   height: 100%;
   background-color: #616353;
 }
+
+#_preload_ {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  left: -9999px;
+}
