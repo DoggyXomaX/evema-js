@@ -18,9 +18,9 @@ Evema.Grid.Options = {
 };
 
 Evema.Grid.Init = function() {
-    let that = Evema.Grid;
+    const that = Evema.Grid;
 
-    let instance = document.getElementById( 'e-grid' );
+    const instance = document.getElementById( 'e-grid' );
 
     if ( instance === null ) {
         console.error( 'Evema.Grid.Init error' );
@@ -35,7 +35,7 @@ Evema.Grid.Init = function() {
 };
 
 Evema.Grid.Rebuild = function() {
-    let that = Evema.Grid;
+    const that = Evema.Grid;
 
     let instance = that.Instance;
     if ( instance === null ) {
