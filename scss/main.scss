@@ -2,10 +2,14 @@
 @import "_grid.scss";
 @import "_tools.scss";
 
-html, body {
+* {
     margin: 0;
     padding: 0;
     border: 0;
+    box-sizing: border-box;
+}
+
+html, body {
     width: 100%;
     height: 100%;
     background-color: #616353;
