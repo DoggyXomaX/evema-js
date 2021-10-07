@@ -18,6 +18,8 @@ Evema.Grid.Options = {
 };
 
 Evema.Grid.Init = function() {
+    let that = Evema.Grid;
+
     let instance = document.getElementById( 'e-grid' );
 
     if ( instance === null ) {
@@ -26,20 +28,22 @@ Evema.Grid.Init = function() {
         return;
     }
 
-    Evema.Grid.Instance = instance;
-    Evema.Grid.Context = instance.getContext( '2d' );
+    that.Instance = instance;
+    that.Context = instance.getContext( '2d' );
 
-    Evema.Grid.Rebuild();
+    that.Rebuild();
 };
 
 Evema.Grid.Rebuild = function() {
-    let instance = Evema.Grid.Instance;
+    let that = Evema.Grid;
+
+    let instance = that.Instance;
     if ( instance === null ) {
         console.warn( 'Can\'t rebuild grid, the grid instance is null!' );
         return;
     }
 
-    let options = Evema.Grid.Options;
+    let options = that.Options;
     let width = ( options.Current.Width ? options.Current.Width : options.Standard.Width );
     let height = ( options.Current.Height ? options.Current.Height : options.Standard.Height );
     let cellWidth = ( options.Current.CellWidth ? options.Current.CellWidth : options.Standard.CellWidth );
@@ -47,38 +51,43 @@ Evema.Grid.Rebuild = function() {
     instance.width = width * cellWidth;
     instance.height = height * cellHeight;
 
-    Evema.Grid.Redraw();
+    that.Redraw();
 }
 
 Evema.Grid.Redraw = function() {
-    let grid = Evema.Grid;
-    grid.Clear();
-    grid.Draw();
+    let that = Evema.Grid;
+
+    that.Clear();
+    that.Draw();
 }
 
 Evema.Grid.Clear = function() {
-    let instance = Evema.Grid.Instance;
+    let that = Evema.Grid;
+
+    let instance = that.Instance;
     if ( instance === null ) {
         console.warn( 'Can\'t clear grid, the grid instance is null!' );
         return;
     }
 
-    let context = Evema.Grid.Context;
-    let options = Evema.Grid.Options;
+    let context = that.Context;
+    let options = that.Options;
     let backgroundColor = ( options.Current.BackgroundColor ? options.Current.BackgroundColor : options.Standard.BackgroundColor );
     context.clearRect( 0, 0, instance.width, instance.height );
     document.documentElement.style.setProperty( '--grid-background-color', backgroundColor );
 }
 
 Evema.Grid.Draw = function() {
-    let instance = Evema.Grid.Instance;
+    let that = Evema.Grid;
+
+    let instance = that.Instance;
     if ( instance === null ) {
         console.warn( 'Can\'t draw grid, the grid instance is null!' );
         return;
     }
 
-    let context = Evema.Grid.Context;
-    let options = Evema.Grid.Options;
+    let context = that.Context;
+    let options = that.Options;
     let lineColor = ( options.Current.LineColor ? options.Current.LineColor : options.Standard.LineColor );
     context.fillStyle = lineColor;
 
@@ -99,3 +108,11 @@ Evema.Grid.Draw = function() {
         console.warn( `Unknown draw type "${type}"` );
     }
 }
+
+Evema.Grid.Actions = [
+    { name: 'Init', func: Evema.Grid.Init },
+    { name: 'Rebuild', func: Evema.Grid.Rebuild },
+    { name: 'Redraw', func: Evema.Grid.Redraw },
+    { name: 'Clear', func: Evema.Grid.Clear },
+    { name: 'Draw', func: Evema.Grid.Draw }
+]
