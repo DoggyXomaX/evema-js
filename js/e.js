@@ -20,7 +20,7 @@ Evema.Modules = [];
 Evema.Eval = function( action_query ) {
     const path = action_query.split( ':' );
     if ( path.length !== 2 ) {
-        console.warn( `Unknown action type "${action_name}"` );
+        console.warn( `Unknown action type "${action_query}"` );
         return;
     }
 
@@ -53,5 +53,38 @@ Evema.Eval = function( action_query ) {
     }
     console.warn( `Unknown "${module_name}" action "${action_name}"` );
 };
+
+Evema.Set = function( option_query, value ) {
+    const that = Evema;
+
+    const path = option_query.split( ':' );
+    if ( path.length !== 2 ) {
+        console.warn( `Unknown option type "${option_query}"` );
+        return;
+    }
+
+    let module;
+    const module_name = path[ 0 ];
+    for ( let i = 0, k = that.Modules.length; i < k; i++ ) {
+        if ( that.Modules[ i ].name === module_name ) {
+            module = that.Modules[ i ];
+            break;
+        }
+    }
+
+    if ( module === undefined ) {
+        console.warn( `Module "${module_name}" not found` );
+        return;
+    }
+
+    const options = module.value.Options;
+    if ( options === undefined ) {
+        console.warn( `Module "${module_name}" has no options` );
+        return;
+    }
+
+    const option_name = path[ 1 ];
+    options.Current[ option_name ] = value;
+}
 
 window.onload = Evema.Init;

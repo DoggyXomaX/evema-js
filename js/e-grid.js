@@ -3,20 +3,6 @@ Evema.Grid = {};
 Evema.Grid.Instance = null;
 Evema.Grid.Context = null;
 
-// TODO: Move grid-options to global options
-Evema.Grid.Options = {
-    Standard: {
-        BackgroundColor: '#D3D1BB',
-        LineColor: '#000000',
-        CellWidth: 8,
-        CellHeight: 8,
-        Width: 100,
-        Height: 60,
-        Type: 'pixel'
-    },
-    Current: {}
-};
-
 Evema.Grid.Init = function() {
     const that = Evema.Grid;
 
@@ -109,10 +95,24 @@ Evema.Grid.Draw = function() {
     }
 }
 
+// TODO: Move grid-options to global options
+Evema.Grid.Options = {
+    Standard: {
+        BackgroundColor: '#D3D1BB',
+        LineColor: '#000000',
+        CellWidth: 8,
+        CellHeight: 8,
+        Width: 100,
+        Height: 60,
+        Type: 'pixel'
+    },
+    Current: {}
+};
+
 Evema.Grid.Actions = [
     { name: 'Init', func: Evema.Grid.Init },
     { name: 'Rebuild', func: Evema.Grid.Rebuild },
     { name: 'Redraw', func: Evema.Grid.Redraw },
     { name: 'Clear', func: Evema.Grid.Clear },
     { name: 'Draw', func: Evema.Grid.Draw }
-]
+];

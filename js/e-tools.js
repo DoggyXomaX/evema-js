@@ -30,6 +30,15 @@ const T_Exit = function() {
     window.close();
 };
 
+Evema.Tools.Options = {
+    Standard: {
+
+    },
+    Current: {
+        
+    }
+};
+
 Evema.Tools.Actions = [
     { name: 'Init', func: Evema.Tools.Init },
     { name: 'File', func: T_File },
