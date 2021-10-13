@@ -17,6 +17,8 @@ Evema.Core.Generator.Toggle = function() {
     const that = Evema.Core.Generator;
 
     const new_value = !Evema.Get( 'Generator:Enabled' );
+    if ( new_value && !Evema.Get( 'Power:Enabled' ) ) return;
+    
     Evema.Set( 'Generator:Enabled', new_value );
 
     if ( new_value ) {
