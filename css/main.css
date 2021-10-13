@@ -112,6 +112,18 @@
   background-image: url(/img/ui/generator-tool/active.svg);
 }
 
+.tools__button.options-tool {
+  background-image: url(/img/ui/options-tool/normal.svg);
+}
+
+.tools__button.options-tool:hover {
+  background-image: url(/img/ui/options-tool/hover.svg);
+}
+
+.tools__button.options-tool:active {
+  background-image: url(/img/ui/options-tool/active.svg);
+}
+
 .tools__button.about-tool {
   background-image: url(/img/ui/about-tool/normal.svg);
 }

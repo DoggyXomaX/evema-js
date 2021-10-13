@@ -7,6 +7,8 @@ let _preload_images_ = [
     '/img/ui/power-tool/active.svg',
     '/img/ui/generator-tool/hover.svg',
     '/img/ui/generator-tool/active.svg',
+    '/img/ui/options-tool/hover.svg',
+    '/img/ui/options-tool/active.svg',
     '/img/ui/about-tool/hover.svg',
     '/img/ui/about-tool/active.svg',
     '/img/ui/exit-tool/hover.svg',
