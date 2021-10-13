@@ -148,6 +148,14 @@
   background-image: url(/img/ui/exit-tool/active.svg);
 }
 
+.tools__button.power-tool.enabled {
+  background-image: url(/img/ui/power-tool/enabled.svg);
+}
+
+.tools__button.generator-tool.enabled {
+  background-image: url(/img/ui/generator-tool/enabled.svg);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -163,9 +171,5 @@ html, body {
 }
 
 #_preload_ {
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  position: fixed;
-  left: -9999px;
+  display: none;
 }

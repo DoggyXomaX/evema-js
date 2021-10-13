@@ -17,6 +17,8 @@ Evema.Init = function() {
     that.LoadModules();
     that.Eval( 'Tools:Init' );
     that.Eval( 'Grid:Init' );
+    that.Eval( 'Power:Init' );
+    that.Eval( 'Generator:Init' );
 }
 
 Evema.Modules = [];

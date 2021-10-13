@@ -15,11 +15,11 @@ const T_Element = function() {
 };
 
 const T_Power = function() {
-    console.log( "T_Power not implemented" );
+    Evema.Eval( 'Power:Toggle' );
 };
 
 const T_Generator = function() {
-    console.log( "T_Generator not implemented" );
+    Evema.Eval( 'Generator:Toggle' );
 };
 
 const T_Options = function() {
