@@ -23,6 +23,9 @@ Evema.Core.Power.Toggle = function() {
         $( that.Button ).addClass( 'enabled' );
     } else {
         $( that.Button ).removeClass( 'enabled' );
+        if ( Evema.Get( 'Generator:Enabled' ) ) {
+            Evema.Eval( 'Generator:Toggle' );
+        }
     }
 }
 
