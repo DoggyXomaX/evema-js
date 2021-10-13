@@ -1,4 +1,8 @@
 let _preload_images_ = [
+    '/img/ui/show-panel/hover.svg',
+    '/img/ui/show-panel/active.svg',
+    '/img/ui/hide-panel/hover.svg',
+    '/img/ui/hide-panel/active.svg',
     '/img/ui/file-tool/hover.svg',
     '/img/ui/file-tool/active.svg',
     '/img/ui/element-tool/hover.svg',

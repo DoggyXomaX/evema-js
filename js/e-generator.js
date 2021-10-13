@@ -7,7 +7,7 @@ Evema.Core.Generator.Button = null;
 Evema.Core.Generator.Init = function() {
     const that = Evema.Core.Generator;
 
-    that.Button = $( that.C_BUTTON_CLASS )[ 0 ];
+    that.Button = Evema.Get( 'Tools:Buttons' )[ 'generator-tool' ];
     if ( that.Button === undefined ) {
         console.warn( `"${that.C_BUTTON_CLASS}" button was not found in document` );
     }

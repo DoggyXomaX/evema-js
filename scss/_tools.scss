@@ -49,6 +49,39 @@ $buttons: (
         background-image: url(/img/ui/menu-splitter.svg);
     }
 
+    &__hide {
+        cursor: pointer;
+        width: 30px;
+        height: 100px;
+        background-image: url( /img/ui/hide-panel/normal.svg );
+        &:hover { background-image: url( /img/ui/hide-panel/hover.svg ); }
+        &:active { background-image: url( /img/ui/hide-panel/active.svg ); }
+    }
+
+    &__show {
+        cursor: pointer;
+        position: absolute;
+        border-radius: 0 0 8px 8px;
+        left: 50%;
+        transform: translateX( -50% );
+        width: 100px;
+        line-height: initial;
+        background-image: url( /img/ui/show-panel/normal.svg );
+        &:hover { background-image: url( /img/ui/show-panel/hover.svg ); }
+        &:active { background-image: url( /img/ui/show-panel/active.svg ); }
+        box-shadow: 0 0 16px #00000080;
+
+        transition: bottom 0.5s, height 0.5s, opacity 0.5s;
+        bottom: 0;
+        height: 0;
+        opacity: 0;
+        &.active {
+            bottom: -30px;
+            height: 30px;
+            opacity: 1;
+        }
+    }
+
     &__button {
         cursor: pointer;
         width: 100px;
@@ -56,5 +89,10 @@ $buttons: (
         @each $button in $buttons {
             @include get-button($button);
         }
+    }
+
+    transition: transform 0.5s;
+    &.hidden {
+        transform: translateY( -100% );
     }
 } 

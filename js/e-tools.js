@@ -1,9 +1,39 @@
 Evema.Core.Tools = {};
 
-Evema.Core.Tools.Buttons = [];
-
 Evema.Core.Tools.Init = function() {
+    const that = Evema.Core.Tools;
 
+    Evema.Set( 'Tools:Buttons', {
+        'tools__show'    : $( '.tools__show'    )[ 0 ],
+        'tools__hide'    : $( '.tools__hide'    )[ 0 ],
+        'file-tool'      : $( '.file-tool'      )[ 0 ],
+        'element-tool'   : $( '.element-tool'   )[ 0 ],
+        'power-tool'     : $( '.power-tool'     )[ 0 ],
+        'generator-tool' : $( '.generator-tool' )[ 0 ],
+        'about-tool'     : $( '.about-tool'     )[ 0 ],
+        'options-tool'   : $( '.options-tool'   )[ 0 ],
+        'exit-tool'      : $( '.exit-tool'      )[ 0 ]
+    } );
+
+    Evema.Set( 'Tools:Panel', $( '.tools' )[ 0 ] );
+};
+
+const T_HidePanel = function() {
+    const that = Evema.Core.Tools;
+
+    const panel = Evema.Get( 'Tools:Panel' );
+    const showButton = Evema.Get( 'Tools:Buttons' )[ 'tools__show' ];
+    $( panel ).addClass( 'hidden' );
+    $( showButton ).addClass( 'active' );
+};
+
+const T_ShowPanel = function() {
+    const that = Evema.Core.Tools;
+
+    const panel = Evema.Get( 'Tools:Panel' );
+    const showButton = Evema.Get( 'Tools:Buttons' )[ 'tools__show' ];
+    $( panel ).removeClass( 'hidden' );
+    $( showButton ).removeClass( 'active' );
 };
 
 const T_File = function() {
@@ -36,7 +66,8 @@ const T_Exit = function() {
 
 Evema.Core.Tools.Options = {
     Standard: {
-
+        Buttons: {},
+        Panel: {}
     },
     Current: {
         
@@ -45,6 +76,8 @@ Evema.Core.Tools.Options = {
 
 Evema.Core.Tools.Actions = [
     { name: 'Init', func: Evema.Core.Tools.Init },
+    { name: 'HidePanel', func: T_HidePanel },
+    { name: 'ShowPanel', func: T_ShowPanel },
     { name: 'File', func: T_File },
     { name: 'Element', func: T_Element },
     { name: 'Power', func: T_Power },
