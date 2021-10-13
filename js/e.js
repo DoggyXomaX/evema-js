@@ -1,9 +1,13 @@
 let Evema = {};
 
+Evema.Core = {};
+
 Evema.LoadModules = function() {
     Evema.Modules.push(
-        { name: 'Tools', value: Evema.Tools },
-        { name: 'Grid', value: Evema.Grid }
+        { name: 'Tools',     value: Evema.Core.Tools },
+        { name: 'Grid',      value: Evema.Core.Grid },
+        { name: 'Power',     value: Evema.Core.Power },
+        { name: 'Generator', value: Evema.Core.Generator }
     );
 };
 
@@ -26,10 +30,15 @@ Evema.Eval = function( action_query ) {
 
     let module;
     const module_name = path[ 0 ];
-    for ( let i = 0, k = Evema.Modules.length; i < k; i++ ) {
-        if ( Evema.Modules[ i ].name === module_name ) {
-            module = Evema.Modules[ i ];
-            break;
+
+    if ( module_name === '@' ) {
+        module = Evema;
+    } else {
+        for ( let i = 0, k = Evema.Modules.length; i < k; i++ ) {
+            if ( Evema.Modules[ i ].name === module_name ) {
+                module = Evema.Modules[ i ];
+                break;
+            }
         }
     }
 
@@ -65,10 +74,15 @@ Evema.Set = function( option_query, value ) {
 
     let module;
     const module_name = path[ 0 ];
-    for ( let i = 0, k = that.Modules.length; i < k; i++ ) {
-        if ( that.Modules[ i ].name === module_name ) {
-            module = that.Modules[ i ];
-            break;
+
+    if ( module_name === '@' ) {
+        module = Evema;
+    } else {
+        for ( let i = 0, k = that.Modules.length; i < k; i++ ) {
+            if ( that.Modules[ i ].name === module_name ) {
+                module = that.Modules[ i ];
+                break;
+            }
         }
     }
 
@@ -85,6 +99,13 @@ Evema.Set = function( option_query, value ) {
 
     const option_name = path[ 1 ];
     options.Current[ option_name ] = value;
+}
+
+Evema.Actions = [];
+
+Evema.Options = {
+    Standard: {},
+    Current: {}
 }
 
 window.onload = Evema.Init;

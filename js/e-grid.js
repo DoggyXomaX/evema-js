@@ -1,15 +1,15 @@
-Evema.Grid = {};
+Evema.Core.Grid = {};
 
-Evema.Grid.Instance = null;
-Evema.Grid.Context = null;
+Evema.Core.Grid.Instance = null;
+Evema.Core.Grid.Context = null;
 
-Evema.Grid.Init = function() {
-    const that = Evema.Grid;
+Evema.Core.Grid.Init = function() {
+    const that = Evema.Core.Grid;
 
     const instance = document.getElementById( 'e-grid' );
 
     if ( instance === null ) {
-        console.error( 'Evema.Grid.Init error' );
+        console.error( 'Evema.Core.Grid.Init error' );
         console.error( 'Can\'t find element "e-grid" in document' );
         return;
     }
@@ -20,8 +20,8 @@ Evema.Grid.Init = function() {
     that.Rebuild();
 };
 
-Evema.Grid.Rebuild = function() {
-    const that = Evema.Grid;
+Evema.Core.Grid.Rebuild = function() {
+    const that = Evema.Core.Grid;
 
     let instance = that.Instance;
     if ( instance === null ) {
@@ -40,15 +40,15 @@ Evema.Grid.Rebuild = function() {
     that.Redraw();
 }
 
-Evema.Grid.Redraw = function() {
-    let that = Evema.Grid;
+Evema.Core.Grid.Redraw = function() {
+    let that = Evema.Core.Grid;
 
     that.Clear();
     that.Draw();
 }
 
-Evema.Grid.Clear = function() {
-    let that = Evema.Grid;
+Evema.Core.Grid.Clear = function() {
+    let that = Evema.Core.Grid;
 
     let instance = that.Instance;
     if ( instance === null ) {
@@ -63,8 +63,8 @@ Evema.Grid.Clear = function() {
     document.documentElement.style.setProperty( '--grid-background-color', backgroundColor );
 }
 
-Evema.Grid.Draw = function() {
-    let that = Evema.Grid;
+Evema.Core.Grid.Draw = function() {
+    let that = Evema.Core.Grid;
 
     let instance = that.Instance;
     if ( instance === null ) {
@@ -96,7 +96,7 @@ Evema.Grid.Draw = function() {
 }
 
 // TODO: Move grid-options to global options
-Evema.Grid.Options = {
+Evema.Core.Grid.Options = {
     Standard: {
         BackgroundColor: '#D3D1BB',
         LineColor: '#000000',
@@ -109,10 +109,10 @@ Evema.Grid.Options = {
     Current: {}
 };
 
-Evema.Grid.Actions = [
-    { name: 'Init', func: Evema.Grid.Init },
-    { name: 'Rebuild', func: Evema.Grid.Rebuild },
-    { name: 'Redraw', func: Evema.Grid.Redraw },
-    { name: 'Clear', func: Evema.Grid.Clear },
-    { name: 'Draw', func: Evema.Grid.Draw }
+Evema.Core.Grid.Actions = [
+    { name: 'Init', func: Evema.Core.Grid.Init },
+    { name: 'Rebuild', func: Evema.Core.Grid.Rebuild },
+    { name: 'Redraw', func: Evema.Core.Grid.Redraw },
+    { name: 'Clear', func: Evema.Core.Grid.Clear },
+    { name: 'Draw', func: Evema.Core.Grid.Draw }
 ];

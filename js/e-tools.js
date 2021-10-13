@@ -1,8 +1,8 @@
-Evema.Tools = {};
+Evema.Core.Tools = {};
 
-Evema.Tools.Buttons = [];
+Evema.Core.Tools.Buttons = [];
 
-Evema.Tools.Init = function() {
+Evema.Core.Tools.Init = function() {
 
 };
 
@@ -22,6 +22,10 @@ const T_Generator = function() {
     console.log( "T_Generator not implemented" );
 };
 
+const T_Options = function() {
+    console.log( "T_Options not implemented" );
+};
+
 const T_About = function() {
     console.log( "T_About not implemented" );
 };
@@ -30,7 +34,7 @@ const T_Exit = function() {
     window.close();
 };
 
-Evema.Tools.Options = {
+Evema.Core.Tools.Options = {
     Standard: {
 
     },
@@ -39,12 +43,13 @@ Evema.Tools.Options = {
     }
 };
 
-Evema.Tools.Actions = [
-    { name: 'Init', func: Evema.Tools.Init },
+Evema.Core.Tools.Actions = [
+    { name: 'Init', func: Evema.Core.Tools.Init },
     { name: 'File', func: T_File },
     { name: 'Element', func: T_Element },
     { name: 'Power', func: T_Power },
     { name: 'Generator', func: T_Generator },
+    { name: 'Options', func: T_Options },
     { name: 'About', func: T_About },
     { name: 'Exit', func: T_Exit }
 ];
