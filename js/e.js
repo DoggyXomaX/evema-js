@@ -101,6 +101,44 @@ Evema.Set = function( option_query, value ) {
     options.Current[ option_name ] = value;
 }
 
+Evema.Get = function( option_query ) {
+    const that = Evema;
+
+    const path = option_query.split( ':' );
+    if ( path.length !== 2 ) {
+        console.warn( `Unknown option type "${option_query}"` );
+        return;
+    }
+
+    let module;
+    const module_name = path[ 0 ];
+
+    if ( module_name === '@' ) {
+        module = Evema;
+    } else {
+        for ( let i = 0, k = that.Modules.length; i < k; i++ ) {
+            if ( that.Modules[ i ].name === module_name ) {
+                module = that.Modules[ i ];
+                break;
+            }
+        }
+    }
+
+    if ( module === undefined ) {
+        console.warn( `Module "${module_name}" not found` );
+        return;
+    }
+
+    const options = module.value.Options;
+    if ( options === undefined ) {
+        console.warn( `Module "${module_name}" has no options` );
+        return;
+    }
+
+    const option_name = path[ 1 ];
+    return options.Current[ option_name ];
+}
+
 Evema.Actions = [];
 
 Evema.Options = {
