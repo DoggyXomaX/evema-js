@@ -23,7 +23,7 @@ Evema.Init = function() {
 
 Evema.Modules = [];
 
-Evema.Eval = function( action_query ) {
+Evema.Eval = function( action_query, params ) {
     const path = action_query.split( ':' );
     if ( path.length !== 2 ) {
         console.warn( `Unknown action type "${action_query}"` );
@@ -58,7 +58,7 @@ Evema.Eval = function( action_query ) {
     const action_name = path[ 1 ];
     for ( let i = 0, k = actions.length; i < k; i++ ) {
         if ( actions[ i ].name === action_name ) {
-            actions[ i ].func();
+            actions[ i ].func( params );
             return;
         }
     }
