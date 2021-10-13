@@ -16,9 +16,5 @@ html, body {
 }
 
 #_preload_ {
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    position: fixed;
-    left: -9999px;
+    display: none;
 }
