@@ -1,7 +1,5 @@
 Evema.Core.Generator = {};
 
-Evema.Core.Generator.C_BUTTON_CLASS = ".tools__button.generator-tool";
-
 Evema.Core.Generator.Button = null;
 
 Evema.Core.Generator.Init = function() {

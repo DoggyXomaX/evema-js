@@ -1,13 +1,11 @@
 Evema.Core.Power = {};
 
-Evema.Core.Power.C_BUTTON_CLASS = ".tools__button.power-tool";
-
 Evema.Core.Power.Button = null;
 
 Evema.Core.Power.Init = function() {
     const that = Evema.Core.Power;
 
-    that.Button = $( that.C_BUTTON_CLASS )[ 0 ];
+    that.Button = Evema.Get( 'Tools:Buttons' )[ 'power-tool' ];
     if ( that.Button === undefined ) {
         console.warn( `"${that.C_BUTTON_CLASS}" button was not found in document` );
     }
