@@ -5,9 +5,10 @@ Evema.Core.Generator.Button = null;
 Evema.Core.Generator.Init = function() {
     const that = Evema.Core.Generator;
 
-    that.Button = Evema.Get( 'Tools:Buttons' )[ 'generator-tool' ];
+    const btn_name = 'generator-tool';
+    that.Button = Evema.Get( 'Tools:Buttons' )[ btn_name ];
     if ( that.Button === undefined ) {
-        console.warn( `"${that.C_BUTTON_CLASS}" button was not found in document` );
+        console.warn( `"${btn_name}" button was not found in document` );
     }
 }
 

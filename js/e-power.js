@@ -5,9 +5,10 @@ Evema.Core.Power.Button = null;
 Evema.Core.Power.Init = function() {
     const that = Evema.Core.Power;
 
-    that.Button = Evema.Get( 'Tools:Buttons' )[ 'power-tool' ];
+    const btn_name = 'power-tool';
+    that.Button = Evema.Get( 'Tools:Buttons' )[ btn_name ];
     if ( that.Button === undefined ) {
-        console.warn( `"${that.C_BUTTON_CLASS}" button was not found in document` );
+        console.warn( `"${btn_name}" button was not found in document` );
     }
 };
 
