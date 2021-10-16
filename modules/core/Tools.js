@@ -1,7 +1,9 @@
-Evema.Core.Tools = {};
+Evema.Modules[ "Tools" ] = ( function() {
 
-Evema.Core.Tools.Init = function() {
-    const that = Evema.Core.Tools;
+const Tools = {};
+
+Tools.Init = function() {
+    const that = Tools;
 
     Evema.Set( 'Tools:Buttons', {
         'tools__show'    : $( '.tools__show'    )[ 0 ],
@@ -18,8 +20,8 @@ Evema.Core.Tools.Init = function() {
     Evema.Set( 'Tools:Panel', $( '.tools' )[ 0 ] );
 };
 
-const T_HidePanel = function() {
-    const that = Evema.Core.Tools;
+Tools.HidePanel = function() {
+    const that = Tools;
 
     const panel = Evema.GetLocal( that, 'Panel' );
     const showButton = Evema.GetLocal( that, 'Buttons' )[ 'tools__show' ];
@@ -27,8 +29,8 @@ const T_HidePanel = function() {
     $( showButton ).addClass( 'active' );
 };
 
-const T_ShowPanel = function() {
-    const that = Evema.Core.Tools;
+Tools.ShowPanel = function() {
+    const that = Tools;
 
     const panel = Evema.GetLocal( that, 'Panel' );
     const showButton = Evema.GetLocal( that, 'Buttons' )[ 'tools__show' ];
@@ -36,35 +38,35 @@ const T_ShowPanel = function() {
     $( showButton ).removeClass( 'active' );
 };
 
-const T_File = function() {
-    console.log( "T_File not implemented" );
+Tools.File = function() {
+    console.log( "Tools.File not implemented" );
 };
 
-const T_Element = function() {
-    console.log( "T_Element not implemented" );
+Tools.Element = function() {
+    console.log( "Tools.Element not implemented" );
 };
 
-const T_Power = function() {
+Tools.Power = function() {
     Evema.Eval( 'Power:Toggle' );
 };
 
-const T_Generator = function() {
+Tools.Generator = function() {
     Evema.Eval( 'Generator:Toggle' );
 };
 
-const T_Options = function() {
-    console.log( "T_Options not implemented" );
+Tools.OptionsFunc = function() {
+    console.log( "Tools.OptionsFunc not implemented" );
 };
 
-const T_About = function() {
-    console.log( "T_About not implemented" );
+Tools.About = function() {
+    console.log( "Tools.About not implemented" );
 };
 
-const T_Exit = function() {
+Tools.Exit = function() {
     window.close();
 };
 
-Evema.Core.Tools.Options = {
+Tools.Options = {
     Standard: {
         Buttons: {},
         Panel: {}
@@ -74,15 +76,17 @@ Evema.Core.Tools.Options = {
     }
 };
 
-Evema.Core.Tools.Actions = {
-    'Init'      : Evema.Core.Tools.Init,
-    'HidePanel' : T_HidePanel,
-    'ShowPanel' : T_ShowPanel,
-    'File'      : T_File,
-    'Element'   : T_Element,
-    'Power'     : T_Power,
-    'Generator' : T_Generator,
-    'Options'   : T_Options,
-    'About'     : T_About,
-    'Exit'      : T_Exit
+Tools.Actions = {
+    'Init'      : Tools.Init,
+    'HidePanel' : Tools.HidePanel,
+    'ShowPanel' : Tools.ShowPanel,
+    'File'      : Tools.File,
+    'Element'   : Tools.Element,
+    'Power'     : Tools.Power,
+    'Generator' : Tools.Generator,
+    'Options'   : Tools.OptionsFunc,
+    'About'     : Tools.About,
+    'Exit'      : Tools.Exit
 };
+
+return Tools; } )();

@@ -1,9 +1,10 @@
-Evema.Core.Generator = {};
+Evema.Modules[ "Generator" ] = ( function() {
+const Generator = {};
 
-Evema.Core.Generator.Button = null;
+Generator.Button = null;
 
-Evema.Core.Generator.Init = function() {
-    const that = Evema.Core.Generator;
+Generator.Init = function() {
+    const that = Generator;
 
     const btn_name = 'generator-tool';
     that.Button = Evema.Get( 'Tools:Buttons' )[ btn_name ];
@@ -12,8 +13,8 @@ Evema.Core.Generator.Init = function() {
     }
 }
 
-Evema.Core.Generator.Toggle = function() {
-    const that = Evema.Core.Generator;
+Generator.Toggle = function() {
+    const that = Generator;
 
     const new_value = !Evema.Get( 'Generator:Enabled' );
     if ( new_value && !Evema.Get( 'Power:Enabled' ) ) return;
@@ -27,14 +28,16 @@ Evema.Core.Generator.Toggle = function() {
     }
 }
 
-Evema.Core.Generator.Options = {
+Generator.Options = {
     Standard: {
         Enabled: false
     },
     Current: {}
 };
 
-Evema.Core.Generator.Actions = {
-    'Init'   : Evema.Core.Generator.Init,
-    'Toggle' : Evema.Core.Generator.Toggle
+Generator.Actions = {
+    'Init'   : Generator.Init,
+    'Toggle' : Generator.Toggle
 };
+
+return Generator; } )();

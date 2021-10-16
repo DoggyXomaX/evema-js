@@ -1,9 +1,10 @@
-Evema.Core.Power = {};
+Evema.Modules[ "Power" ] = ( function() {
+const Power = {};
 
-Evema.Core.Power.Button = null;
+Power.Button = null;
 
-Evema.Core.Power.Init = function() {
-    const that = Evema.Core.Power;
+Power.Init = function() {
+    const that = Power;
 
     const btn_name = 'power-tool';
     that.Button = Evema.Get( 'Tools:Buttons' )[ btn_name ];
@@ -12,8 +13,8 @@ Evema.Core.Power.Init = function() {
     }
 };
 
-Evema.Core.Power.Toggle = function() {
-    const that = Evema.Core.Power;
+Power.Toggle = function() {
+    const that = Power;
 
     const new_value = !Evema.Get( 'Power:Enabled' );
     Evema.Set( 'Power:Enabled', new_value );
@@ -28,14 +29,16 @@ Evema.Core.Power.Toggle = function() {
     }
 }
 
-Evema.Core.Power.Options = {
+Power.Options = {
     Standard: {
         Enabled: false
     },
     Current: {}
-}
-
-Evema.Core.Power.Actions = {
-    'Init'   : Evema.Core.Power.Init,
-    'Toggle' : Evema.Core.Power.Toggle
 };
+
+Power.Actions = {
+    'Init'   : Power.Init,
+    'Toggle' : Power.Toggle
+};
+
+return Power; } )();

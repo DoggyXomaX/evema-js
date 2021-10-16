@@ -1,10 +1,11 @@
-Evema.Core.Grid = {};
+Evema.Modules[ "Grid" ] = ( function() {
+const Grid = {
+    'Instance': null,
+    'Context': null
+};
 
-Evema.Core.Grid.Instance = null;
-Evema.Core.Grid.Context = null;
-
-Evema.Core.Grid.Init = function() {
-    const that = Evema.Core.Grid;
+Grid.Init = function() {
+    const that = Grid;
 
     const instance = document.getElementById( 'e-grid' );
 
@@ -20,8 +21,8 @@ Evema.Core.Grid.Init = function() {
     that.Rebuild();
 };
 
-Evema.Core.Grid.Rebuild = function() {
-    const that = Evema.Core.Grid;
+Grid.Rebuild = function() {
+    const that = Grid;
 
     const instance = that.Instance;
     if ( instance === null ) {
@@ -40,15 +41,15 @@ Evema.Core.Grid.Rebuild = function() {
     that.Redraw();
 }
 
-Evema.Core.Grid.Redraw = function() {
-    const that = Evema.Core.Grid;
+Grid.Redraw = function() {
+    const that = Grid;
 
     that.Clear();
     that.Draw();
 }
 
-Evema.Core.Grid.Clear = function() {
-    const that = Evema.Core.Grid;
+Grid.Clear = function() {
+    const that = Grid;
 
     const instance = that.Instance;
     if ( instance === null ) {
@@ -62,8 +63,8 @@ Evema.Core.Grid.Clear = function() {
     document.documentElement.style.setProperty( '--grid-background-color', backgroundColor );
 }
 
-Evema.Core.Grid.Draw = function() {
-    const that = Evema.Core.Grid;
+Grid.Draw = function() {
+    const that = Grid;
 
     const instance = that.Instance;
     if ( instance === null ) {
@@ -99,8 +100,7 @@ Evema.Core.Grid.Draw = function() {
     }
 }
 
-// TODO: Move grid-options to global options
-Evema.Core.Grid.Options = {
+Grid.Options = {
     Standard: {
         BackgroundColor: '#D3D1BB',
         LineColor: '#000000',
@@ -115,10 +115,12 @@ Evema.Core.Grid.Options = {
     Current: {}
 };
 
-Evema.Core.Grid.Actions = {
-    'Init'    : Evema.Core.Grid.Init,
-    'Rebuild' : Evema.Core.Grid.Rebuild,
-    'Redraw'  : Evema.Core.Grid.Redraw,
-    'Clear'   : Evema.Core.Grid.Clear,
-    'Draw'    : Evema.Core.Grid.Draw
+Grid.Actions = {
+    'Init'    : Grid.Init,
+    'Rebuild' : Grid.Rebuild,
+    'Redraw'  : Grid.Redraw,
+    'Clear'   : Grid.Clear,
+    'Draw'    : Grid.Draw
 };
+
+return Grid; } )();
