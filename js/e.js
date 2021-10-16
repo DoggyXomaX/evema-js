@@ -177,6 +177,21 @@ Evema.Get = function( option_query ) {
     return ( value !== undefined ? value : options.Standard[ option_name ] );
 }
 
+Evema.EvalLocal = function( module, name, params ) {
+    if ( !module || !module.Actions ) return;
+    const actions = module.Actions;
+    const current_action = actions[ name ];
+    if ( current_action !== undefined ) {
+        current_action( params );
+    }
+}
+
+Evema.SetLocal = function( module, name, value ) {
+    if ( !module || !module.Options ) return;
+    const options = module.Options;
+    options.Current[ name ] = value;
+}
+
 Evema.GetLocal = function( module, name ) {
     if ( !module || !module.Options ) return;
     const options = module.Options;
