@@ -1,4 +1,4 @@
-let Evema = {
+const Evema = {
     Core: {},
     Modules: {},
     QueuePosition: 0,
