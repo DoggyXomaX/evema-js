@@ -20,8 +20,12 @@ Tools.Init = function() {
 
     const listLength = that.List.length;
     const buttons = {
-        'tools__show': $( '.tools__show' )[ 0 ],
-        'tools__hide': $( '.tools__hide' )[ 0 ]
+        'tools__show': $( '.tools__show' ).attr( 'onclick', 
+            "Evema.Eval('Tools:ShowPanel')" 
+        )[ 0 ],
+        'tools__hide': $( '.tools__hide' ).attr( 'onclick', 
+            "Evema.Eval('Tools:HidePanel')" 
+        )[ 0 ]
     };
 
     for ( let i = 0; i < listLength; i++ ) {
