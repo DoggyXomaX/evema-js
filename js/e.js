@@ -123,8 +123,14 @@ Evema.Get = function( option_query ) {
 
     const option_name = path[ 1 ];
     const value = options.Current[ option_name ];
-    if ( value ) return value;
-    return options.Standard[ option_name ];
+    return ( value !== undefined ? value : options.Standard[ option_name ] );
+}
+
+Evema.GetLocal = function( source, name ) {
+    if ( !source || !source.Options ) return;
+    const options = source.Options;
+    const value = options.Current[ option_name ];
+    return ( value !== undefined ? value : options.Standard[ option_name ] );
 }
 
 Evema.Actions = {};
