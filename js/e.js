@@ -10,7 +10,8 @@ Evema.LoadModules = function() {
         'Tools'     : core.Tools,
         'Grid'      : core.Grid,
         'Power'     : core.Power,
-        'Generator' : core.Generator
+        'Generator' : core.Generator,
+        'Schema'    : core.Schema
     };
 
     // TODO: Load additional modules
@@ -24,6 +25,7 @@ Evema.Init = function() {
     that.Eval( 'Grid:Init' );
     that.Eval( 'Power:Init' );
     that.Eval( 'Generator:Init' );
+    that.Eval( 'Schema:Init' );
 }
 
 Evema.Eval = function( action_query, params ) {
