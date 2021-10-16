@@ -29,11 +29,11 @@ Evema.Core.Grid.Rebuild = function() {
         return;
     }
 
-    const options = that.Options;
-    const width = ( options.Current.Width ? options.Current.Width : options.Standard.Width );
-    const height = ( options.Current.Height ? options.Current.Height : options.Standard.Height );
-    const cellWidth = ( options.Current.CellWidth ? options.Current.CellWidth : options.Standard.CellWidth );
-    const cellHeight = ( options.Current.CellHeight ? options.Current.CellHeight : options.Standard.CellHeight );
+    const width = Evema.GetLocal( that, 'Width' );
+    const height = Evema.GetLocal( that, 'Height' );
+    const cellWidth = Evema.GetLocal( that, 'CellWidth' );
+    const cellHeight = Evema.GetLocal( that, 'CellHeight' );
+
     instance.width = width * cellWidth;
     instance.height = height * cellHeight;
 
@@ -57,37 +57,41 @@ Evema.Core.Grid.Clear = function() {
     }
 
     const context = that.Context;
-    const options = that.Options;
-    const backgroundColor = ( options.Current.BackgroundColor ? options.Current.BackgroundColor : options.Standard.BackgroundColor );
+    const backgroundColor = Evema.GetLocal( that, 'BackgroundColor' );
     context.clearRect( 0, 0, instance.width, instance.height );
     document.documentElement.style.setProperty( '--grid-background-color', backgroundColor );
 }
 
 Evema.Core.Grid.Draw = function() {
-    let that = Evema.Core.Grid;
+    const that = Evema.Core.Grid;
 
-    let instance = that.Instance;
+    const instance = that.Instance;
     if ( instance === null ) {
         console.warn( 'Can\'t draw grid, the grid instance is null!' );
         return;
     }
 
-    let context = that.Context;
-    let options = that.Options;
-    let lineColor = ( options.Current.LineColor ? options.Current.LineColor : options.Standard.LineColor );
+    const context = that.Context;
+
+    const type = Evema.GetLocal( that, 'Type' );
+    const lineColor = Evema.GetLocal( that, 'LineColor' );
+    const cw = Evema.GetLocal( that, 'CellWidth' );
+    const ch = Evema.GetLocal( that, 'CellHeight' );
+    const width = Evema.GetLocal( that, 'Width' );
+    const height = Evema.GetLocal( that, 'Height' );
+    const ox = Evema.GetLocal( that, 'OffsetX' ) % cw;
+    const oy = Evema.GetLocal( that, 'OffsetY' ) % ch;
+
     context.fillStyle = lineColor;
-
-    let cw = ( options.Current.CellWidth ? options.Current.CellWidth : options.Standard.CellWidth );
-    let ch = ( options.Current.CellHeight ? options.Current.CellHeight : options.Standard.CellHeight );
-    let width = ( options.Current.Width ? options.Current.Width : options.Standard.Width );
-    let height = ( options.Current.Height ? options.Current.Height : options.Standard.Height );
-    let type = ( options.Current.Type ? options.Current.Type : options.Standard.Type );
-
     if ( type === 'pixel' ) {
         // Draw one pixel on each cell in left-top corner
         for ( let y = 0; y < height; y++ ) {
             for ( let x = 0; x < width; x++ ) {
-                context.fillRect( cw * x, ch * y, 1, 1 );
+                context.fillRect( 
+                    cw * x + ox, 
+                    ch * y + oy, 
+                    1, 1 
+                );
             }
         }
     } else {
