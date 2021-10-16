@@ -5,7 +5,7 @@ const Tools = {};
 Tools.Init = function() {
     const that = Tools;
 
-    Evema.Set( 'Tools:Buttons', {
+    Evema.SetLocal( that, 'Buttons', {
         'tools__show'    : $( '.tools__show'    )[ 0 ],
         'tools__hide'    : $( '.tools__hide'    )[ 0 ],
         'file-tool'      : $( '.file-tool'      )[ 0 ],
@@ -17,7 +17,7 @@ Tools.Init = function() {
         'exit-tool'      : $( '.exit-tool'      )[ 0 ]
     } );
 
-    Evema.Set( 'Tools:Panel', $( '.tools' )[ 0 ] );
+    Evema.SetLocal( that, 'Panel', $( '.tools' )[ 0 ] );
 };
 
 Tools.HidePanel = function() {

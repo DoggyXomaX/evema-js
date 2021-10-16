@@ -16,8 +16,8 @@ Power.Init = function() {
 Power.Toggle = function() {
     const that = Power;
 
-    const new_value = !Evema.Get( 'Power:Enabled' );
-    Evema.Set( 'Power:Enabled', new_value );
+    const new_value = !Evema.GetLocal( that, 'Enabled' );
+    Evema.SetLocal( that, 'Enabled', new_value );
 
     if ( new_value ) {
         $( that.Button ).addClass( 'enabled' );
