@@ -5,20 +5,15 @@ Evema.Core = {};
 Evema.Modules = {};
 
 Evema.LoadModules = function() {
-    const core = Evema.Core;
-    Evema.Modules = {
-        'Tools'     : core.Tools,
-        'Grid'      : core.Grid,
-        'Power'     : core.Power,
-        'Generator' : core.Generator,
-        'Schema'    : core.Schema
-    };
+    const that = Evema;
+    
+    that.Modules = { ...that.Core };
 
     // TODO: Load additional modules
 };
 
 Evema.Init = function() {
-    let that = Evema;
+    const that = Evema;
 
     that.LoadModules();
     that.Eval( 'Tools:Init' );
