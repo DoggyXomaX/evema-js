@@ -17,10 +17,12 @@ $buttons: (
 );
 
 .tools {
-    position: relative;
+    position: fixed;
     display: block;
-    margin: 0 auto;
     border-radius: 0 0 15px 15px;
+    left: 50%;
+    top: 0;
+    transform: translateX( -50% );
     width: max-content;
 
     font-size: 0;
@@ -63,7 +65,7 @@ $buttons: (
         position: absolute;
         border-radius: 0 0 8px 8px;
         left: 50%;
-        transform: translateX( -50% );
+        transform: translate( -50% );
         width: 100px;
         line-height: initial;
         background-image: url( /img/ui/show-panel/normal.svg );
@@ -93,6 +95,6 @@ $buttons: (
 
     transition: transform 0.5s;
     &.hidden {
-        transform: translateY( -100% );
+        transform: translate( -50%, -100% );
     }
 } 

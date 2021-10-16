@@ -1,16 +1,15 @@
 :root {
-    --grid-x: 0px;
-    --grid-y: 0px;
     --grid-background-color: #D3D1BB;
 }
 
 .grid {
     display: block;
-    position: absolute;
+    position: relative;
+    margin: 0 auto;
     padding: 4px;
-    top: calc( var( --grid-y ) + 50% );
-    left: calc( var( --grid-x ) + 50% );
-    transform: translate( -50%, -50% );
+    top: 50%;
+    transform: translateY( -50% );
+    width: max-content;
     background-color: var( --grid-background-color );
     box-shadow: 0px 0px 32px #00000040;
 
