@@ -2,13 +2,16 @@ let Evema = {};
 
 Evema.Core = {};
 
+Evema.Modules = {};
+
 Evema.LoadModules = function() {
-    Evema.Modules.push(
-        { name: 'Tools',     value: Evema.Core.Tools },
-        { name: 'Grid',      value: Evema.Core.Grid },
-        { name: 'Power',     value: Evema.Core.Power },
-        { name: 'Generator', value: Evema.Core.Generator }
-    );
+    const core = Evema.Core;
+    Evema.Modules = {
+        'Tools'     : core.Tools,
+        'Grid'      : core.Grid,
+        'Power'     : core.Power,
+        'Generator' : core.Generator
+    };
 };
 
 Evema.Init = function() {
@@ -21,8 +24,6 @@ Evema.Init = function() {
     that.Eval( 'Generator:Init' );
 }
 
-Evema.Modules = [];
-
 Evema.Eval = function( action_query, params ) {
     const path = action_query.split( ':' );
     if ( path.length !== 2 ) {
@@ -30,18 +31,12 @@ Evema.Eval = function( action_query, params ) {
         return;
     }
 
-    let module;
     const module_name = path[ 0 ];
-
+    let module;
     if ( module_name === '@' ) {
         module = Evema;
     } else {
-        for ( let i = 0, k = Evema.Modules.length; i < k; i++ ) {
-            if ( Evema.Modules[ i ].name === module_name ) {
-                module = Evema.Modules[ i ];
-                break;
-            }
-        }
+        module = Evema.Modules[ module_name ];
     }
 
     if ( module === undefined ) {
@@ -49,20 +44,19 @@ Evema.Eval = function( action_query, params ) {
         return;
     }
 
-    const actions = module.value.Actions;
+    const actions = module.Actions;
     if ( actions === undefined ) {
         console.warn( `Module "${module_name}" has no actions` );
         return;
     }
 
     const action_name = path[ 1 ];
-    for ( let i = 0, k = actions.length; i < k; i++ ) {
-        if ( actions[ i ].name === action_name ) {
-            actions[ i ].func( params );
-            return;
-        }
+    const current_action = actions[ action_name ];
+    if ( current_action !== undefined ) {
+        current_action( params );
+    } else {
+        console.warn( `Unknown "${module_name}" action "${action_name}"` );
     }
-    console.warn( `Unknown "${module_name}" action "${action_name}"` );
 };
 
 Evema.Set = function( option_query, value ) {
@@ -74,18 +68,12 @@ Evema.Set = function( option_query, value ) {
         return;
     }
 
-    let module;
     const module_name = path[ 0 ];
-
+    let module;
     if ( module_name === '@' ) {
         module = Evema;
     } else {
-        for ( let i = 0, k = that.Modules.length; i < k; i++ ) {
-            if ( that.Modules[ i ].name === module_name ) {
-                module = that.Modules[ i ];
-                break;
-            }
-        }
+        module = Evema.Modules[ module_name ];
     }
 
     if ( module === undefined ) {
@@ -93,7 +81,7 @@ Evema.Set = function( option_query, value ) {
         return;
     }
 
-    const options = module.value.Options;
+    const options = module.Options;
     if ( options === undefined ) {
         console.warn( `Module "${module_name}" has no options` );
         return;
@@ -111,19 +99,13 @@ Evema.Get = function( option_query ) {
         console.warn( `Unknown option type "${option_query}"` );
         return;
     }
-
-    let module;
+    
     const module_name = path[ 0 ];
-
+    let module;
     if ( module_name === '@' ) {
         module = Evema;
     } else {
-        for ( let i = 0, k = that.Modules.length; i < k; i++ ) {
-            if ( that.Modules[ i ].name === module_name ) {
-                module = that.Modules[ i ];
-                break;
-            }
-        }
+        module = Evema.Modules[ module_name ];
     }
 
     if ( module === undefined ) {
@@ -131,7 +113,7 @@ Evema.Get = function( option_query ) {
         return;
     }
 
-    const options = module.value.Options;
+    const options = module.Options;
     if ( options === undefined ) {
         console.warn( `Module "${module_name}" has no options` );
         return;
@@ -141,7 +123,7 @@ Evema.Get = function( option_query ) {
     return options.Current[ option_name ];
 }
 
-Evema.Actions = [];
+Evema.Actions = {};
 
 Evema.Options = {
     Standard: {},

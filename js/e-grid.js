@@ -104,15 +104,17 @@ Evema.Core.Grid.Options = {
         CellHeight: 8,
         Width: 100,
         Height: 60,
-        Type: 'pixel'
+        Type: 'pixel',
+        OffsetX: 0,
+        OffsetY: 0
     },
     Current: {}
 };
 
-Evema.Core.Grid.Actions = [
-    { name: 'Init', func: Evema.Core.Grid.Init },
-    { name: 'Rebuild', func: Evema.Core.Grid.Rebuild },
-    { name: 'Redraw', func: Evema.Core.Grid.Redraw },
-    { name: 'Clear', func: Evema.Core.Grid.Clear },
-    { name: 'Draw', func: Evema.Core.Grid.Draw }
-];
+Evema.Core.Grid.Actions = {
+    'Init'    : Evema.Core.Grid.Init,
+    'Rebuild' : Evema.Core.Grid.Rebuild,
+    'Redraw'  : Evema.Core.Grid.Redraw,
+    'Clear'   : Evema.Core.Grid.Clear,
+    'Draw'    : Evema.Core.Grid.Draw
+};

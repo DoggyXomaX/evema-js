@@ -34,7 +34,7 @@ Evema.Core.Generator.Options = {
     Current: {}
 };
 
-Evema.Core.Generator.Actions = [
-    { name: 'Init', func: Evema.Core.Generator.Init },
-    { name: 'Toggle', func: Evema.Core.Generator.Toggle }
-];
+Evema.Core.Generator.Actions = {
+    'Init'   : Evema.Core.Generator.Init,
+    'Toggle' : Evema.Core.Generator.Toggle
+};

@@ -35,7 +35,7 @@ Evema.Core.Power.Options = {
     Current: {}
 }
 
-Evema.Core.Power.Actions = [
-    { name: 'Init', func: Evema.Core.Power.Init },
-    { name: 'Toggle', func: Evema.Core.Power.Toggle }
-];
+Evema.Core.Power.Actions = {
+    'Init'   : Evema.Core.Power.Init,
+    'Toggle' : Evema.Core.Power.Toggle
+};

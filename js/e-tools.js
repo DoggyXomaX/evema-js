@@ -74,15 +74,15 @@ Evema.Core.Tools.Options = {
     }
 };
 
-Evema.Core.Tools.Actions = [
-    { name: 'Init', func: Evema.Core.Tools.Init },
-    { name: 'HidePanel', func: T_HidePanel },
-    { name: 'ShowPanel', func: T_ShowPanel },
-    { name: 'File', func: T_File },
-    { name: 'Element', func: T_Element },
-    { name: 'Power', func: T_Power },
-    { name: 'Generator', func: T_Generator },
-    { name: 'Options', func: T_Options },
-    { name: 'About', func: T_About },
-    { name: 'Exit', func: T_Exit }
-];
+Evema.Core.Tools.Actions = {
+    'Init'      : Evema.Core.Tools.Init,
+    'HidePanel' : T_HidePanel,
+    'ShowPanel' : T_ShowPanel,
+    'File'      : T_File,
+    'Element'   : T_Element,
+    'Power'     : T_Power,
+    'Generator' : T_Generator,
+    'Options'   : T_Options,
+    'About'     : T_About,
+    'Exit'      : T_Exit
+};
