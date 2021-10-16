@@ -25,6 +25,8 @@ Evema.Init = function() {
 }
 
 Evema.Eval = function( action_query, params ) {
+    const that = Evema;
+
     const path = action_query.split( ':' );
     if ( path.length !== 2 ) {
         console.warn( `Unknown action type "${action_query}"` );
@@ -34,9 +36,9 @@ Evema.Eval = function( action_query, params ) {
     const module_name = path[ 0 ];
     let module;
     if ( module_name === '@' ) {
-        module = Evema;
+        module = that;
     } else {
-        module = Evema.Modules[ module_name ];
+        module = that.Modules[ module_name ];
     }
 
     if ( module === undefined ) {
@@ -71,9 +73,9 @@ Evema.Set = function( option_query, value ) {
     const module_name = path[ 0 ];
     let module;
     if ( module_name === '@' ) {
-        module = Evema;
+        module = that;
     } else {
-        module = Evema.Modules[ module_name ];
+        module = that.Modules[ module_name ];
     }
 
     if ( module === undefined ) {
@@ -103,9 +105,9 @@ Evema.Get = function( option_query ) {
     const module_name = path[ 0 ];
     let module;
     if ( module_name === '@' ) {
-        module = Evema;
+        module = that;
     } else {
-        module = Evema.Modules[ module_name ];
+        module = that.Modules[ module_name ];
     }
 
     if ( module === undefined ) {
@@ -120,7 +122,9 @@ Evema.Get = function( option_query ) {
     }
 
     const option_name = path[ 1 ];
-    return options.Current[ option_name ];
+    const value = options.Current[ option_name ];
+    if ( value ) return value;
+    return options.Standard[ option_name ];
 }
 
 Evema.Actions = {};
