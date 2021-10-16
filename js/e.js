@@ -12,6 +12,8 @@ Evema.LoadModules = function() {
         'Power'     : core.Power,
         'Generator' : core.Generator
     };
+
+    // TODO: Load additional modules
 };
 
 Evema.Init = function() {
