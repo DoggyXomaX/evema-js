@@ -65,11 +65,11 @@ Evema.Init = function() {
 
     console.log( 'Initializing modules' );
 
-    const keys = Object.keys( that.Modules );
-    const keysLength = keys.length;
-    for ( let i = 0; i < keysLength; i++ ) {
-        console.log( `Initializing "${keys[ i ]}"...` );
-        that.Eval( `${keys[ i ]}:Init` );
+    const queue = that.Queue;
+    const queueLength = queue.length;
+    for ( let i = 0; i < queueLength; i++ ) {
+        console.log( `Initializing "${queue[ i ].name}"...` );
+        that.Eval( `${queue[ i ].name}:Init` );
     }
 
     console.log( 'Initializing complete' );
