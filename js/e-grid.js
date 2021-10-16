@@ -23,17 +23,17 @@ Evema.Core.Grid.Init = function() {
 Evema.Core.Grid.Rebuild = function() {
     const that = Evema.Core.Grid;
 
-    let instance = that.Instance;
+    const instance = that.Instance;
     if ( instance === null ) {
         console.warn( 'Can\'t rebuild grid, the grid instance is null!' );
         return;
     }
 
-    let options = that.Options;
-    let width = ( options.Current.Width ? options.Current.Width : options.Standard.Width );
-    let height = ( options.Current.Height ? options.Current.Height : options.Standard.Height );
-    let cellWidth = ( options.Current.CellWidth ? options.Current.CellWidth : options.Standard.CellWidth );
-    let cellHeight = ( options.Current.CellHeight ? options.Current.CellHeight : options.Standard.CellHeight );
+    const options = that.Options;
+    const width = ( options.Current.Width ? options.Current.Width : options.Standard.Width );
+    const height = ( options.Current.Height ? options.Current.Height : options.Standard.Height );
+    const cellWidth = ( options.Current.CellWidth ? options.Current.CellWidth : options.Standard.CellWidth );
+    const cellHeight = ( options.Current.CellHeight ? options.Current.CellHeight : options.Standard.CellHeight );
     instance.width = width * cellWidth;
     instance.height = height * cellHeight;
 
@@ -41,24 +41,24 @@ Evema.Core.Grid.Rebuild = function() {
 }
 
 Evema.Core.Grid.Redraw = function() {
-    let that = Evema.Core.Grid;
+    const that = Evema.Core.Grid;
 
     that.Clear();
     that.Draw();
 }
 
 Evema.Core.Grid.Clear = function() {
-    let that = Evema.Core.Grid;
+    const that = Evema.Core.Grid;
 
-    let instance = that.Instance;
+    const instance = that.Instance;
     if ( instance === null ) {
         console.warn( 'Can\'t clear grid, the grid instance is null!' );
         return;
     }
 
-    let context = that.Context;
-    let options = that.Options;
-    let backgroundColor = ( options.Current.BackgroundColor ? options.Current.BackgroundColor : options.Standard.BackgroundColor );
+    const context = that.Context;
+    const options = that.Options;
+    const backgroundColor = ( options.Current.BackgroundColor ? options.Current.BackgroundColor : options.Standard.BackgroundColor );
     context.clearRect( 0, 0, instance.width, instance.height );
     document.documentElement.style.setProperty( '--grid-background-color', backgroundColor );
 }
