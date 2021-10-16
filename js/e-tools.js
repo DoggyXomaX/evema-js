@@ -21,8 +21,8 @@ Evema.Core.Tools.Init = function() {
 const T_HidePanel = function() {
     const that = Evema.Core.Tools;
 
-    const panel = Evema.Get( 'Tools:Panel' );
-    const showButton = Evema.Get( 'Tools:Buttons' )[ 'tools__show' ];
+    const panel = Evema.GetLocal( that, 'Panel' );
+    const showButton = Evema.GetLocal( that, 'Buttons' )[ 'tools__show' ];
     $( panel ).addClass( 'hidden' );
     $( showButton ).addClass( 'active' );
 };
@@ -30,8 +30,8 @@ const T_HidePanel = function() {
 const T_ShowPanel = function() {
     const that = Evema.Core.Tools;
 
-    const panel = Evema.Get( 'Tools:Panel' );
-    const showButton = Evema.Get( 'Tools:Buttons' )[ 'tools__show' ];
+    const panel = Evema.GetLocal( that, 'Panel' );
+    const showButton = Evema.GetLocal( that, 'Buttons' )[ 'tools__show' ];
     $( panel ).removeClass( 'hidden' );
     $( showButton ).removeClass( 'active' );
 };
