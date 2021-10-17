@@ -143,7 +143,7 @@ Evema.Set = function( option_query, value ) {
     const option_name = path[ 1 ];
 
     if ( options.Setters && options.Setters[ option_name ] !== undefined ) {
-        options.Setters[ option_name ]( value );
+        options.Setters[ option_name ]( module, value );
     } else {
         options.Current[ option_name ] = value;
     }
@@ -179,7 +179,7 @@ Evema.Get = function( option_query ) {
 
     const option_name = path[ 1 ];
     if ( options.Getters && options.Getters[ option_name ] !== undefined ) {
-        return options.Getters[ option_name ]( options );
+        return options.Getters[ option_name ]( module );
     }
 
     const value = options.Current[ option_name ];
@@ -200,7 +200,7 @@ Evema.SetLocal = function( module, name, value ) {
     const options = module.Options;
     
     if ( options.Setters && options.Setters[ name ] !== undefined ) {
-        options.Setters[ name ]( value );
+        options.Setters[ name ]( module, value );
     } else {
         options.Current[ name ] = value;
     }
@@ -211,7 +211,7 @@ Evema.GetLocal = function( module, name ) {
     const options = module.Options;
     
     if ( options.Getters && options.Getters[ name ] !== undefined ) {
-        return options.Getters[ name ]( options );
+        return options.Getters[ name ]( module );
     }
 
     const value = options.Current[ name ];
