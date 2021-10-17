@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Ubuntu';
+  src: url("../fonts/Ubuntu/subset-Ubuntu-Regular.woff2") format("woff2"), url("../fonts/Ubuntu/subset-Ubuntu-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url("../fonts/Ubuntu/subset-Ubuntu-Bold.woff2") format("woff2"), url("../fonts/Ubuntu/subset-Ubuntu-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --grid-background-color: #D3D1BB;
 }
@@ -215,6 +231,68 @@
 
 .tools__button.generator-tool.enabled {
   background-image: url(/img/ui/generator-tool/enabled.svg);
+}
+
+.context-menu {
+  position: absolute;
+  display: block;
+  border: Solid 1px #9C9F83;
+  left: 50%;
+  top: 50%;
+  width: 250px;
+  background-color: #D3D1BB;
+  -webkit-box-shadow: 0 0 16px #00000080;
+          box-shadow: 0 0 16px #00000080;
+}
+
+.context-menu li {
+  list-style: none;
+}
+
+.context-menu hr {
+  display: block;
+  height: 1px;
+  background: -webkit-gradient(linear, left top, right top, from(#9C9F8300), color-stop(50%, #9C9F83), to(#9C9F8300));
+  background: linear-gradient(90deg, #9C9F8300 0%, #9C9F83 50%, #9C9F8300 100%);
+}
+
+.context-menu__item {
+  display: block;
+  height: 30px;
+}
+
+.context-menu__item * {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+  vertical-align: middle;
+}
+
+.context-menu__split {
+  display: block;
+}
+
+.context-menu__split hr {
+  position: relative;
+  display: block;
+  margin: 8px 0;
+  background: #9C9F83;
+}
+
+.context-menu__icon {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  font-size: 0;
+  background-color: green;
+}
+
+.context-menu__label {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  background-color: red;
 }
 
 * {
