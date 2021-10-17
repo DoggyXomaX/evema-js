@@ -16,16 +16,8 @@ Generator.Init = function() {
 Generator.Toggle = function() {
     const that = Generator;
 
-    const new_value = !Evema.GetLocal( that, 'Enabled' );
-    if ( new_value && !Evema.Get( 'Power:Enabled' ) ) return;
-    
-    Evema.SetLocal( that, 'Enabled', new_value );
-
-    if ( new_value ) {
-        $( that.Button ).addClass( 'enabled' );
-    } else {
-        $( that.Button ).removeClass( 'enabled' );
-    }
+    const value = Evema.GetLocal( that, 'Enabled' );
+    Evema.SetLocal( that, 'Enabled', !value );
 }
 
 Generator.Options = {
@@ -34,15 +26,22 @@ Generator.Options = {
     },
     Current: {},
     Setters: {
-        Enabled: {
+        Enabled: function( source, value ) {
+            if ( value && !Evema.Get( 'Power:Enabled' ) ) return;
+            
+            source.Options.Current.enabled = value;
 
+            if ( value ) {
+                $( source.Button ).addClass( 'enabled' );
+            } else {
+                $( source.Button ).removeClass( 'enabled' );
+            }
         }
     },
     Getters: {
-        Enabled: function( options ) {
-            console.log( "Enabled getters just for test" );
-            const value = options.Current.enabled;
-            return ( value !== undefined ? value : options.Standard.enabled );
+        Enabled: function( source ) {
+            const value = source.Options.Current.enabled;
+            return ( value !== undefined ? value : source.Options.Standard.enabled );
         }
     }
 };
