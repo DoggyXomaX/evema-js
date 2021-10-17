@@ -141,7 +141,12 @@ Evema.Set = function( option_query, value ) {
     }
 
     const option_name = path[ 1 ];
-    options.Current[ option_name ] = value;
+
+    if ( options.Setters && options.Setters[ option_name ] !== undefined ) {
+        options.Setters[ option_name ]( value );
+    } else {
+        options.Current[ option_name ] = value;
+    }
 }
 
 Evema.Get = function( option_query ) {
@@ -174,7 +179,13 @@ Evema.Get = function( option_query ) {
 
     const option_name = path[ 1 ];
     const value = options.Current[ option_name ];
-    return ( value !== undefined ? value : options.Standard[ option_name ] );
+    const outputValue = ( value !== undefined ? value : options.Standard[ option_name ] );
+
+    if ( options.Getters && options.Getters[ option_name ] !== undefined ) {
+        return options.Getters[ option_name ]( outputValue );
+    }
+
+    return outputValue;
 }
 
 Evema.EvalLocal = function( module, name, params ) {
@@ -189,14 +200,25 @@ Evema.EvalLocal = function( module, name, params ) {
 Evema.SetLocal = function( module, name, value ) {
     if ( !module || !module.Options ) return;
     const options = module.Options;
-    options.Current[ name ] = value;
+    
+    if ( options.Setters && options.Setters[ name ] !== undefined ) {
+        options.Setters[ name ]( value );
+    } else {
+        options.Current[ name ] = value;
+    }
 }
 
 Evema.GetLocal = function( module, name ) {
     if ( !module || !module.Options ) return;
     const options = module.Options;
     const value = options.Current[ name ];
-    return ( value !== undefined ? value : options.Standard[ name ] );
+    const outputValue = ( value !== undefined ? value : options.Standard[ name ] );
+
+    if ( options.Getters && options.Getters[ name ] !== undefined ) {
+        return options.Getters[ name ]( outputValue );
+    }
+
+    return outputValue;
 }
 
 Evema.Actions = {
