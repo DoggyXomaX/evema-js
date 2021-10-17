@@ -75,6 +75,10 @@ Evema.Init = function() {
     console.log( 'Initializing complete' );
 }
 
+Evema.Has = function( module_name ) {
+    return Evema.Modules[ module_name ] !== undefined;
+}
+
 Evema.Eval = function( action_query, params ) {
     const that = Evema;
 
