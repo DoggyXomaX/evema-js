@@ -27,9 +27,7 @@ Power.Options = {
     Current: {},
     Setters: {
         Enabled: function( source, value ) {
-            const options = source.Options;
-            options.Current.enabled = value;
-
+            Evema.SetLocal( source, 'enabled', value );
             if ( value ) {
                 $( source.Button ).addClass( 'enabled' );
             } else {
@@ -40,8 +38,7 @@ Power.Options = {
     },
     Getters: {
         Enabled: function( source ) {
-            const value = source.Options.Current.enabled;
-            return ( value !== undefined ? value : source.Options.Standard.enabled );
+            return Evema.GetLocal( source, 'enabled' );
         }
     }
 };
