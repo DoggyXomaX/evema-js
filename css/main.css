@@ -234,6 +234,7 @@
 }
 
 .context-menu {
+  cursor: default;
   position: absolute;
   display: block;
   border: Solid 1px #9C9F83;
@@ -266,28 +267,63 @@
   display: inline-block;
   font-size: 0;
   vertical-align: middle;
+  text-align: center;
+}
+
+.context-menu__item:hover {
+  background-color: #9C9F8380;
+}
+
+.context-menu__item:hover.disabled {
+  background-color: unset;
 }
 
 .context-menu__split {
   display: block;
+  padding: 8px 0;
 }
 
 .context-menu__split hr {
   position: relative;
   display: block;
-  margin: 8px 0;
   background: #9C9F83;
 }
 
 .context-menu__icon {
   width: 30px;
   height: 30px;
-  background-color: green;
+  background-size: 100%;
+  background-position: center;
+  background-image: url(../img/ui/about-tool/normal.svg);
 }
 
 .context-menu__label {
+  padding-left: 8px;
+  text-align: left;
+  width: 203px;
   font-size: 14px;
-  background-color: red;
+  color: #616353;
+}
+
+.context-menu__label.disabled {
+  color: #9C9F83;
+}
+
+.context-menu__arrow {
+  width: 15px;
+  height: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: none;
+  background-image: url(../img/ui/context-menu/arrow/normal.svg);
+}
+
+.context-menu__arrow.sub {
+  display: inline-block;
+}
+
+.context-menu__arrow.disabled {
+  background-image: url(../img/ui/context-menu/arrow/disabled.svg);
 }
 
 * {
