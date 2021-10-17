@@ -235,7 +235,11 @@
 
 .context-menu {
   cursor: default;
-  position: absolute;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: fixed;
   display: block;
   border: Solid 1px #9C9F83;
   left: 50%;
@@ -244,6 +248,10 @@
   background-color: #D3D1BB;
   -webkit-box-shadow: 0 0 16px #00000080;
           box-shadow: 0 0 16px #00000080;
+}
+
+.context-menu.hidden {
+  display: none;
 }
 
 .context-menu li {
