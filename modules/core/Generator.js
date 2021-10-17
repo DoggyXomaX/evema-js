@@ -30,9 +30,21 @@ Generator.Toggle = function() {
 
 Generator.Options = {
     Standard: {
-        Enabled: false
+        enabled: false
     },
-    Current: {}
+    Current: {},
+    Setters: {
+        Enabled: {
+
+        }
+    },
+    Getters: {
+        Enabled: function( options ) {
+            console.log( "Enabled getters just for test" );
+            const value = options.Current.enabled;
+            return ( value !== undefined ? value : options.Standard.enabled );
+        }
+    }
 };
 
 Generator.Actions = {

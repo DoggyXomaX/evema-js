@@ -178,14 +178,12 @@ Evema.Get = function( option_query ) {
     }
 
     const option_name = path[ 1 ];
-    const value = options.Current[ option_name ];
-    const outputValue = ( value !== undefined ? value : options.Standard[ option_name ] );
-
     if ( options.Getters && options.Getters[ option_name ] !== undefined ) {
-        return options.Getters[ option_name ]( outputValue );
+        return options.Getters[ option_name ]( options );
     }
 
-    return outputValue;
+    const value = options.Current[ option_name ];
+    return ( value !== undefined ? value : options.Standard[ option_name ] );
 }
 
 Evema.EvalLocal = function( module, name, params ) {
@@ -211,14 +209,13 @@ Evema.SetLocal = function( module, name, value ) {
 Evema.GetLocal = function( module, name ) {
     if ( !module || !module.Options ) return;
     const options = module.Options;
-    const value = options.Current[ name ];
-    const outputValue = ( value !== undefined ? value : options.Standard[ name ] );
-
+    
     if ( options.Getters && options.Getters[ name ] !== undefined ) {
-        return options.Getters[ name ]( outputValue );
+        return options.Getters[ name ]( options );
     }
 
-    return outputValue;
+    const value = options.Current[ name ];
+    return ( value !== undefined ? value : options.Standard[ name ] );
 }
 
 Evema.Actions = {
