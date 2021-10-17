@@ -18,6 +18,9 @@ Grid.Init = function() {
     that.Instance = instance;
     that.Context = instance.getContext( '2d' );
 
+    Evema.SetLocal( that, 'Instance', that.Instance );
+    Evema.SetLocal( that, 'Context', that.Context );
+
     that.Rebuild();
 };
 
@@ -102,6 +105,8 @@ Grid.Draw = function() {
 
 Grid.Options = {
     Standard: {
+        Instance: null,
+        Context: null,
         BackgroundColor: '#D3D1BB',
         LineColor: '#000000',
         CellWidth: 8,
