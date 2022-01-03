@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>EVEMA-JS: Circuit editor</title>
+
+        <!-- Warning ICONS zone -->
+        <link rel="icon" sizes="any" type="image/svg+xml" href="./icons/favicon.svg" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png" />
+        <link rel="manifest" href="./icons/site.webmanifest" />
+        <link rel="mask-icon" href="./icons/safari-pinned-tab.svg" color="#232323" />
+        <link rel="shortcut icon" href="./icons/favicon.ico" />
+        <meta name="apple-mobile-web-app-title" content="Evema JS" />
+        <meta name="application-name" content="Evema JS" />
+        <meta name="msapplication-TileColor" content="#000000">
+        <meta name="msapplication-TileImage" content="./icons/mstile-144x144.png" />
+        <meta name="msapplication-config" content="./icons/browserconfig.xml" />
+        <meta name="theme-color" content="#000000" />
+        <!-- /Warning ICONS zone -->
+
+        <link rel="stylesheet" type="text/css" href="./css/main.min.css" />
+    </head>
+    <body>
+        <div id="_preload_"></div>
+
+        <div class="grid">
+            <canvas id="e-grid" class="grid__wrapper">
+                <p>Look! Your browser does not support Canvas :(</p>
+            </canvas>
+        </div>
+
+        <div class="tools">
+            <button class="tools__show"></button>
+            <button class="tools__hide"></button>
+            <hr>
+            <span class="tools__logo"></span>
+        </div>
+
+        <ul class="context-menu hidden">
+            <li class="context-menu__item">
+                <span class="context-menu__icon"></span
+                ><p class="context-menu__label">Context-item 1</p
+                ><span class="context-menu__arrow"></span>
+            </li>
+            <li class="context-menu__split"><hr></li>
+            <li class="context-menu__item">
+                <span class="context-menu__icon"></span
+                ><p class="context-menu__label">Context-item 2</p
+                ><span class="context-menu__arrow sub"></span>
+            </li>
+            <hr>
+            <li class="context-menu__item">
+                <span class="context-menu__icon"></span
+                ><p class="context-menu__label">Context-item 3</p
+                ><span class="context-menu__arrow"></span>
+            </li>
+            <hr>
+            <li class="context-menu__item disabled">
+                <span class="context-menu__icon"></span
+                ><p class="context-menu__label disabled">Context-item 4</p
+                ><span class="context-menu__arrow sub disabled"></span>
+            </li>
+            <hr>
+            <li class="context-menu__item disabled">
+                <span class="context-menu__icon"></span
+                ><p class="context-menu__label disabled">Context-item 5</p
+                ><span class="context-menu__arrow disabled"></span>
+            </li>
+            <li class="context-menu__split"><hr></li>
+            <li class="context-menu__item">
+                <span class="context-menu__icon"></span
+                ><p class="context-menu__label">Context-Item 6</p
+                ><span class="context-menu__arrow"></span>
+            </li>
+        </ul>
+        
+        <script id="_preload_script_" src="./js/_preload_.js"></script>
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script src="./js/e.js"></script>
+    </body>
+</html>

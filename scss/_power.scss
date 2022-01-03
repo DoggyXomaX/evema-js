@@ -1,0 +1,9 @@
+.tools {
+    &__button {
+        &.power-tool {
+            &.enabled {
+                background-image: url( /img/ui/power-tool/enabled.svg );
+            }
+        }
+    }
+}
