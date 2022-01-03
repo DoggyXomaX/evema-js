@@ -1,0 +1,10 @@
+{
+    "modules": [
+        { "name": "Tools",       "path": "core/Tools"       },    
+        { "name": "Generator",   "path": "core/Generator"   },
+        { "name": "Power",       "path": "core/Power"       },    
+        { "name": "Grid",        "path": "core/Grid"        },
+        { "name": "ContextMenu", "path": "core/ContextMenu" },
+        { "name": "Schema",      "path": "core/Schema"      }
+    ]
+}
