@@ -1,0 +1,6 @@
+{
+  "forceMinify": false,
+  "scripts_path": "../modules",
+  "output_file": "../js/main.js",
+  "output_minified_file": "../js/main.js"
+}

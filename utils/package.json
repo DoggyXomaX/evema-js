@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "node-minify": "^3.6.0"
+  },
+  "name": "evema-js-builder",
+  "version": "1.0.0",
+  "main": "build.js",
+  "devDependencies": {},
+  "scripts": {
+    "build": "node build.js",
+    "minify": "node build.js minify"
+  },
+  "author": "DoggyXomaX",
+  "license": "ISC",
+  "description": ""
+}

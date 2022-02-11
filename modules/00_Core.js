@@ -2,62 +2,23 @@ const Evema = {
     Core: {},
     Modules: {},
     QueuePosition: 0,
-    Queue: []
+    Queue: [], 
 };
 
-Evema.ProceedQueue = function() {
+Evema.OnIndexLoad = function() {
     const that = Evema;
+    const modules = [
+        { "name": "Tools",       "path": "core/Tools"       },    
+        { "name": "Generator",   "path": "core/Generator"   },
+        { "name": "Power",       "path": "core/Power"       },    
+        { "name": "Grid",        "path": "core/Grid"        },
+        { "name": "ContextMenu", "path": "core/ContextMenu" },
+        { "name": "Schema",      "path": "core/Schema"      }
+    ];
 
-    if ( that.QueuePosition >= that.Queue.length ) {
-        console.log( "Module loading complete" );
-        that.Init();
-        return;
-    }
-
-    const script = document.createElement( "SCRIPT" );
-    
-    script.onload = function() {
-        const that = Evema;
-
-        console.log( `${that.Queue[ that.QueuePosition ].name}: Success` );
-        that.QueuePosition++;
-        that.ProceedQueue();
-    };
-
-    script.onerror = function( e ) {
-        const that = Evema;
-
-        console.error( `${that.Queue[ that.QueuePosition ].name}: Failed` );
-        that.QueuePosition++;
-        that.ProceedQueue();
-    };
-
-    const q = that.Queue[ that.QueuePosition ].path;
-    const hasJsExtension = q.lastIndexOf( '.js' ) === q.length - 3;
-    script.src = `/modules/${( hasJsExtension ? q : `${q}.js` )}`;
-    document.body.appendChild( script );
-};
-
-Evema.OnIndexLoad = function( data ) {
-    const that = Evema;
-
-    if ( data === undefined ) {
-        console.error( 'Failed to load modules/index.json' );
-        return;
-    }
-
-    const modules = data.modules;
     that.QueuePosition = 0;
     that.Queue = modules;
-
-    console.log( `Load ${modules.length} modules` );
-    that.ProceedQueue();
-};
-
-Evema.LoadModules = function() {
-    const that = Evema;
-
-    $.getJSON( '../modules/index.json', that.OnIndexLoad );
+    that.Init();
 };
 
 Evema.Init = function() {
@@ -231,4 +192,4 @@ Evema.Options = {
     Current: {}
 }
 
-window.onload = Evema.LoadModules;
+window.onload = Evema.OnIndexLoad;
