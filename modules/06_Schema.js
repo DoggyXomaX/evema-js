@@ -6,14 +6,14 @@ Schema.Init = function() {
 };
 
 Schema.Actions = {
-    'Init' : Schema.Init
+  'Init' : Schema.Init
 };
 
 Schema.Options = {
-    Standard: {
-        
-    },
-    Current: {}
+  Standard: {
+    
+  },
+  Current: {}
 };
 
 return Schema; } )();
