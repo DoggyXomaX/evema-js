@@ -226,7 +226,5 @@ html, body {
   display: none;
   background-image: url(../img/ui/context-menu/arrow/normal.svg);
 }
-
 .context-menu__arrow.sub { display: inline-block; }
-
 .context-menu__arrow.disabled { background-image: url(../img/ui/context-menu/arrow/disabled.svg); }
