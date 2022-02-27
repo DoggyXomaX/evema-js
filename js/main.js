@@ -1,20 +1,602 @@
-var Evema={Core:{},Modules:{},QueuePosition:0,Queue:[],OnIndexLoad:function(){var a=Evema;a.QueuePosition=0;a.Queue=[{name:"Tools",path:"core/Tools"},{name:"Generator",path:"core/Generator"},{name:"Power",path:"core/Power"},{name:"Grid",path:"core/Grid"},{name:"ContextMenu",path:"core/ContextMenu"},{name:"Schema",path:"core/Schema"}];a.Init()},Init:function(){var a=Evema;console.log("Initializing modules");for(var b=a.Queue,c=b.length,d=0;d<c;d++)console.log('Initializing "'+b[d].name+'"...'),a.Eval(b[d].name+
-":Init");console.log("Initializing complete")},Has:function(a){return void 0!==Evema.Modules[a]},Eval:function(a,b){var c=Evema,d=a.split(":");2!==d.length?console.warn('Unknown action type "'+a+'"'):(a=d[0],c="@"===a?c:c.Modules[a],void 0===c?console.warn('Module "'+a+'" not found'):(c=c.Actions,void 0===c?console.warn('Module "'+a+'" has no actions'):(d=d[1],c=c[d],void 0!==c?c(b):console.warn('Unknown "'+a+'" action "'+d+'"'))))},Set:function(a,b){var c=Evema,d=a.split(":");if(2!==d.length)console.warn('Unknown option type "'+
-a+'"');else if(a=d[0],c="@"===a?c:c.Modules[a],void 0===c)console.warn('Module "'+a+'" not found');else{var e=c.Options;if(void 0===e)console.warn('Module "'+a+'" has no options');else if(d=d[1],e.Setters&&void 0!==e.Setters[d])e.Setters[d](c,b);else e.Current[d]=b}},Get:function(a){var b=Evema,c=a.split(":");if(2!==c.length)console.warn('Unknown option type "'+a+'"');else{a=c[0];var d="@"===a?b:b.Modules[a];if(void 0===d)console.warn('Module "'+a+'" not found');else if(b=d.Options,void 0===b)console.warn('Module "'+
-a+'" has no options');else{c=c[1];if(b.Getters&&void 0!==b.Getters[c])return b.Getters[c](d);a=b.Current[c];return void 0!==a?a:b.Standard[c]}}},EvalLocal:function(a,b,c){a&&a.Actions&&(a=a.Actions[b],void 0!==a&&a(c))},SetLocal:function(a,b,c){if(a&&a.Options){var d=a.Options;if(d.Setters&&void 0!==d.Setters[b])d.Setters[b](a,c);else d.Current[b]=c}},GetLocal:function(a,b){if(a&&a.Options){var c=a.Options;if(c.Getters&&void 0!==c.Getters[b])return c.Getters[b](a);a=c.Current[b];return void 0!==a?
-a:c.Standard[b]}},Actions:{},Options:{Standard:{},Current:{}}};window.onload=Evema.OnIndexLoad;
-Evema.Modules.Tools=function(){var a={List:[{class:"file-tool",func:"Evema.Eval('Tools:File')"},{class:"element-tool",func:"Evema.Eval('Tools:Element')"},{class:"power-tool",func:"Evema.Eval('Tools:Power')"},{class:"generator-tool",func:"Evema.Eval('Tools:Generator')"},{class:"about-tool",func:"Evema.Eval('Tools:About')"},{class:"options-tool",func:"Evema.Eval('Tools:Options')"},{class:"exit-tool",func:"Evema.Eval('Tools:Exit')"}],Init:function(){var b=$(".tools")[0];Evema.SetLocal(a,"Panel",b);for(var c=
-a.List.length,d={tools__show:$(".tools__show").attr("onclick","Evema.Eval('Tools:ShowPanel')")[0],tools__hide:$(".tools__hide").attr("onclick","Evema.Eval('Tools:HidePanel')")[0]},e=0;e<c;e++){b.appendChild(document.createElement("HR"));var f=document.createElement("BUTTON");$(f).addClass("tools__button").addClass(a.List[e].class).attr("onclick",a.List[e].func);d[a.List[e].class]=f;b.appendChild(f)}Evema.SetLocal(a,"Buttons",d)},HidePanel:function(){var b=Evema.GetLocal(a,"Panel"),c=Evema.GetLocal(a,
-"Buttons").tools__show;$(b).addClass("hidden");$(c).addClass("active")},ShowPanel:function(){var b=Evema.GetLocal(a,"Panel"),c=Evema.GetLocal(a,"Buttons").tools__show;$(b).removeClass("hidden");$(c).removeClass("active")},File:function(){console.log("Tools.File not implemented")},Element:function(){console.log("Tools.Element not implemented")},Power:function(){Evema.Eval("Power:Toggle")},Generator:function(){Evema.Eval("Generator:Toggle")},OptionsFunc:function(){console.log("Tools.OptionsFunc not implemented")},
-About:function(){console.log("Tools.About not implemented")},Exit:function(){window.close()},Options:{Standard:{Buttons:{},Panel:{}},Current:{}}};a.Actions={Init:a.Init,HidePanel:a.HidePanel,ShowPanel:a.ShowPanel,File:a.File,Element:a.Element,Power:a.Power,Generator:a.Generator,Options:a.OptionsFunc,About:a.About,Exit:a.Exit};return a}();
-Evema.Modules.Generator=function(){var a={Button:null,Init:function(){a.Button=Evema.Get("Tools:Buttons")["generator-tool"];void 0===a.Button&&console.warn('"generator-tool" button was not found in document')},Toggle:function(){var b=Evema.GetLocal(a,"Enabled");Evema.SetLocal(a,"Enabled",!b)},Options:{Standard:{enabled:!1},Current:{},Setters:{Enabled:function(a,c){if(!c||Evema.Get("Power:Enabled"))Evema.SetLocal(a,"enabled",c),c?$(a.Button).addClass("enabled"):$(a.Button).removeClass("enabled")}},
-Getters:{Enabled:function(a){return Evema.GetLocal(a,"enabled")}}}};a.Actions={Init:a.Init,Toggle:a.Toggle};return a}();
-Evema.Modules.Power=function(){var a={Button:null,Init:function(){a.Button=Evema.Get("Tools:Buttons")["power-tool"];void 0===a.Button&&console.warn('"power-tool" button was not found in document')},Toggle:function(){var b=Evema.GetLocal(a,"Enabled");Evema.SetLocal(a,"Enabled",!b)},Options:{Standard:{enabled:!1},Current:{},Setters:{Enabled:function(a,c){Evema.SetLocal(a,"enabled",c);c?$(a.Button).addClass("enabled"):($(a.Button).removeClass("enabled"),Evema.Set("Generator:Enabled",!1))}},Getters:{Enabled:function(a){return Evema.GetLocal(a,
-"enabled")}}}};a.Actions={Init:a.Init,Toggle:a.Toggle};return a}();
-Evema.Modules.Grid=function(){var a={Instance:null,Context:null,Init:function(){var b=document.getElementById("e-grid");null===b?(console.error("Evema.Core.Grid.Init error"),console.error('Can\'t find element "e-grid" in document')):(a.Instance=b,a.Context=b.getContext("2d"),Evema.SetLocal(a,"Instance",a.Instance),Evema.SetLocal(a,"Context",a.Context),a.Rebuild())},Rebuild:function(){var b=a.Instance;if(null===b)console.warn("Can't rebuild grid, the grid instance is null!");else{var c=Evema.GetLocal(a,
-"Width"),d=Evema.GetLocal(a,"Height"),e=Evema.GetLocal(a,"CellWidth"),f=Evema.GetLocal(a,"CellHeight");b.width=c*e;b.height=d*f;a.Redraw()}},Redraw:function(){a.Clear();a.Draw()},Clear:function(){var b=a.Instance;if(null===b)console.warn("Can't clear grid, the grid instance is null!");else{var c=a.Context,d=Evema.GetLocal(a,"BackgroundColor");c.clearRect(0,0,b.width,b.height);document.documentElement.style.setProperty("--grid-background-color",d)}},Draw:function(){var b=a;if(null===b.Instance)console.warn("Can't draw grid, the grid instance is null!");
-else{var c=b.Context,d=Evema.GetLocal(b,"Type"),e=Evema.GetLocal(b,"LineColor"),f=Evema.GetLocal(b,"CellWidth"),g=Evema.GetLocal(b,"CellHeight"),h=Evema.GetLocal(b,"Width"),k=Evema.GetLocal(b,"Height"),l=Evema.GetLocal(b,"OffsetX")%f;b=Evema.GetLocal(b,"OffsetY")%g;c.fillStyle=e;if("pixel"===d)for(d=0;d<k;d++)for(e=0;e<h;e++)c.fillRect(f*e+l,g*d+b,1,1);else console.warn('Unknown draw type "'+d+'"')}},Options:{Standard:{Instance:null,Context:null,BackgroundColor:"#D3D1BB",LineColor:"#000000",CellWidth:8,
-CellHeight:8,Width:100,Height:60,Type:"pixel",OffsetX:0,OffsetY:0},Current:{}}};a.Actions={Init:a.Init,Rebuild:a.Rebuild,Redraw:a.Redraw,Clear:a.Clear,Draw:a.Draw};return a}();
-Evema.Modules.ContextMenu=function(){var a={Instance:null,Init:function(){var b=a,c=Evema.Get("Grid:Instance");void 0===c?console.warn("No grid instance"):(window.addEventListener("contextmenu",function(a){a.preventDefault()},!1),window.addEventListener("click",function(a){Evema.SetLocal(b,"Visible",!1)},!1),c.oncontextmenu=function(a){a.stopPropagation();a.preventDefault();Evema.SetLocal(b,"Position",{x:a.x,y:a.y});Evema.SetLocal(b,"Visible",!0)},b.Instance=$(".context-menu")[0],b.Instance.addEventListener("click",
-function(a){a.stopPropagation()}),Evema.SetLocal(b,"Instance",b.Instance))},Show:function(){Evema.SetLocal(a,"Visible",!0)},Hide:function(){Evema.SetLocal(a,"Visible",!1)},OnVisible:function(a,c){c?(c=Evema.GetLocal(a,"Position"),a.Instance.style.left=c.x+"px",a.Instance.style.top=c.y+"px",$(a.Instance).removeClass("hidden")):$(a.Instance).addClass("hidden")}};a.Actions={Init:a.Init,Show:a.Show,Hide:a.Hide};a.Options={Standard:{Instance:null,Visible:!1,Position:{x:0,y:0}},Current:{},Setters:{Visible:a.OnVisible}};
-return a}();Evema.Modules.Schema=function(){var a={Init:function(){}};a.Actions={Init:a.Init};a.Options={Standard:{},Current:{}};return a}();
+const Evema = {
+  Core: {},
+  Modules: {},
+};
+
+const PREDEFINED_MODULES = ["Tools", "Generator", "Power", "Grid", "ContextMenu", "Schema"];
+
+Evema.OnIndexLoad = function() {
+  Evema.Init();
+};
+
+Evema.Init = function() {
+  console.log('Initializing modules');
+  const queue = PREDEFINED_MODULES;
+  const queueLength = queue.length;
+  for (let i = 0; i < queueLength; i++) {
+    console.log(`Initializing "${queue[ i ]}"...`);
+    this.Eval(`${queue[ i ]}:Init`);
+  }
+  console.log('Initializing complete');
+};
+
+Evema.Has = function(module_name) {
+  return Evema.Modules[module_name] !== undefined;
+};
+
+Evema.Eval = function(action_query, params) {
+  const path = action_query.split(':');
+  if (path.length !== 2) {
+    console.warn(`Unknown action type "${action_query}"`);
+    return;
+  }
+
+  const module_name = path[0];
+  const module = module_name === '@' ? this : this.Modules[module_name];
+  if (module === undefined) {
+    console.warn(`Module "${module_name}" not found`);
+    return;
+  }
+
+  const actions = module.Actions;
+  if (actions === undefined) {
+    console.warn(`Module "${module_name}" has no actions`);
+    return;
+  }
+
+  const action_name = path[1];
+  if (actions[action_name] === undefined) {
+    console.warn(`Unknown "${module_name}" action "${action_name}"`);
+    return;
+  }
+
+  module.Actions[action_name](params);
+};
+
+Evema.Set = function(option_query, value) {
+  const path = option_query.split(':');
+  if (path.length !== 2) {
+    console.warn(`Unknown option type "${option_query}"`);
+    return;
+  }
+
+  const module_name = path[0];
+  const module = module_name === '@' ? this : this.Modules[module_name];
+  if (module === undefined) {
+    console.warn(`Module "${module_name}" not found`);
+    return;
+  }
+
+  const options = module.Options;
+  if (options === undefined) {
+    console.warn(`Module "${module_name}" has no options`);
+    return;
+  }
+
+  const option_name = path[1];
+  if (options.Setters && options.Setters[option_name] !== undefined) {
+    options.Setters[option_name](module, value);
+  } else {
+    options.Current[option_name] = value;
+  }
+};
+
+Evema.Get = function(option_query) {
+  const path = option_query.split(':');
+  if (path.length !== 2) {
+    console.warn(`Unknown option type "${option_query}"`);
+    return;
+  }
+  
+  const module_name = path[0];
+  const module = module_name === '@' ? this : this.Modules[module_name];
+
+  if (module === undefined) {
+    console.warn(`Module "${module_name}" not found`);
+    return;
+  }
+
+  const options = module.Options;
+  if (options === undefined) {
+    console.warn(`Module "${module_name}" has no options`);
+    return;
+  }
+
+  const option_name = path[1];
+  if (options.Getters && options.Getters[option_name] !== undefined) {
+    return options.Getters[option_name](module);
+  }
+
+  const value = options.Current[option_name];
+  return value !== undefined ? value : options.Standard[option_name];
+};
+
+Evema.EvalLocal = function(module, name, params) {
+  if (module && module.Actions && module.Actions[name] !== undefined) module.Actions[name](params);
+};
+
+Evema.SetLocal = function(module, name, value) {
+  if (!module || !module.Options) return;
+  const options = module.Options;
+  if (options.Setters && options.Setters[name] !== undefined) {
+    options.Setters[name](module, value);
+  } else {
+    options.Current[name] = value;
+  }
+};
+
+Evema.GetLocal = function(module, name) {
+  if (!module || !module.Options) return;
+  const options = module.Options;
+  if (options.Getters && options.Getters[name] !== undefined) {
+    return options.Getters[name](module);
+  }
+  const value = options.Current[name];
+  return value !== undefined ? value : options.Standard[name];
+};
+
+Evema.Actions = {};
+
+Evema.Options = {
+  Standard: {},
+  Current: {}
+};
+
+window.onload = Evema.OnIndexLoad;
+
+Evema.Modules[ "Tools" ] = ( function() {
+
+const Tools = {
+  List: [
+    { class: 'file-tool',      func: "Evema.Eval('Tools:File')"      },
+    { class: 'element-tool',   func: "Evema.Eval('Tools:Element')"   },
+    { class: 'power-tool',     func: "Evema.Eval('Tools:Power')"     },
+    { class: 'generator-tool', func: "Evema.Eval('Tools:Generator')" },
+    { class: 'about-tool',     func: "Evema.Eval('Tools:About')"     },
+    { class: 'options-tool',   func: "Evema.Eval('Tools:Options')"   },
+    { class: 'exit-tool',      func: "Evema.Eval('Tools:Exit')"      }
+  ]
+};
+
+Tools.Init = function() {
+  console.log('Tools.Init', this);
+  const that = Tools;
+
+  const panel = $( '.tools' )[ 0 ];
+  Evema.SetLocal( that, 'Panel', panel );
+
+  const listLength = that.List.length;
+  const buttons = {
+    'tools__show': $( '.tools__show' ).attr( 'onclick', 
+      "Evema.Eval('Tools:ShowPanel')" 
+    )[ 0 ],
+    'tools__hide': $( '.tools__hide' ).attr( 'onclick', 
+      "Evema.Eval('Tools:HidePanel')" 
+    )[ 0 ]
+  };
+
+  for ( let i = 0; i < listLength; i++ ) {
+    panel.appendChild( document.createElement( 'HR' ) );
+
+    const button = document.createElement( 'BUTTON' );
+    $( button )
+      .addClass( 'tools__button' )
+      .addClass( that.List[ i ].class )
+      .attr( 'onclick', that.List[ i ].func );
+
+    buttons[ that.List[ i ].class ] = button;
+    panel.appendChild( button );
+  }
+
+  Evema.SetLocal( that, 'Buttons', buttons );
+};
+
+Tools.HidePanel = function() {
+  const that = Tools;
+
+  const panel = Evema.GetLocal( that, 'Panel' );
+  const showButton = Evema.GetLocal( that, 'Buttons' )[ 'tools__show' ];
+  $( panel ).addClass( 'hidden' );
+  $( showButton ).addClass( 'active' );
+};
+
+Tools.ShowPanel = function() {
+  const that = Tools;
+
+  const panel = Evema.GetLocal( that, 'Panel' );
+  const showButton = Evema.GetLocal( that, 'Buttons' )[ 'tools__show' ];
+  $( panel ).removeClass( 'hidden' );
+  $( showButton ).removeClass( 'active' );
+};
+
+Tools.File = function() {
+  console.log( "Tools.File not implemented" );
+};
+
+Tools.Element = function() {
+  console.log( "Tools.Element not implemented" );
+};
+
+Tools.Power = function() {
+  Evema.Eval( 'Power:Toggle' );
+};
+
+Tools.Generator = function() {
+  Evema.Eval( 'Generator:Toggle' );
+};
+
+Tools.OptionsFunc = function() {
+  console.log( "Tools.OptionsFunc not implemented" );
+};
+
+Tools.About = function() {
+  console.log( "Tools.About not implemented" );
+};
+
+Tools.Exit = function() {
+  window.close();
+};
+
+Tools.Options = {
+  Standard: {
+    Buttons: {},
+    Panel: {}
+  },
+  Current: {
+    
+  }
+};
+
+Tools.Actions = {
+  'Init'      : Tools.Init,
+  'HidePanel' : Tools.HidePanel,
+  'ShowPanel' : Tools.ShowPanel,
+  'File'      : Tools.File,
+  'Element'   : Tools.Element,
+  'Power'     : Tools.Power,
+  'Generator' : Tools.Generator,
+  'Options'   : Tools.OptionsFunc,
+  'About'     : Tools.About,
+  'Exit'      : Tools.Exit
+};
+
+return Tools; } )();
+
+Evema.Modules[ "Generator" ] = ( function() {
+const Generator = {};
+
+Generator.Button = null;
+
+Generator.Init = function() {
+  const that = Generator;
+
+  const btn_name = 'generator-tool';
+  that.Button = Evema.Get( 'Tools:Buttons' )[ btn_name ];
+  if ( that.Button === undefined ) {
+    console.warn( `"${btn_name}" button was not found in document` );
+  }
+}
+
+Generator.Toggle = function() {
+  const that = Generator;
+
+  const value = Evema.GetLocal( that, 'Enabled' );
+  Evema.SetLocal( that, 'Enabled', !value );
+}
+
+Generator.Options = {
+  Standard: {
+    enabled: false
+  },
+  Current: {},
+  Setters: {
+    Enabled: function( source, value ) {
+      if ( value && !Evema.Get( 'Power:Enabled' ) ) return;
+      Evema.SetLocal( source, 'enabled', value );
+      if ( value ) {
+        $( source.Button ).addClass( 'enabled' );
+      } else {
+        $( source.Button ).removeClass( 'enabled' );
+      }
+    }
+  },
+  Getters: {
+    Enabled: function( source ) {
+      return Evema.GetLocal( source, 'enabled' );
+    }
+  }
+};
+
+Generator.Actions = {
+  'Init'   : Generator.Init,
+  'Toggle' : Generator.Toggle
+};
+
+return Generator; } )();
+
+Evema.Modules[ "Power" ] = ( function() {
+const Power = {};
+
+Power.Button = null;
+
+Power.Init = function() {
+  const that = Power;
+
+  const btn_name = 'power-tool';
+  that.Button = Evema.Get( 'Tools:Buttons' )[ btn_name ];
+  if ( that.Button === undefined ) {
+    console.warn( `"${btn_name}" button was not found in document` );
+  }
+}
+
+Power.Toggle = function() {
+  const that = Power;
+
+  const enabled = Evema.GetLocal( that, 'Enabled' );
+  Evema.SetLocal( that, 'Enabled', !enabled );
+}
+
+Power.Options = {
+  Standard: {
+    enabled: false
+  },
+  Current: {},
+  Setters: {
+    Enabled: function( source, value ) {
+      Evema.SetLocal( source, 'enabled', value );
+      if ( value ) {
+        $( source.Button ).addClass( 'enabled' );
+      } else {
+        $( source.Button ).removeClass( 'enabled' );
+        Evema.Set( 'Generator:Enabled', false );
+      }
+    }
+  },
+  Getters: {
+    Enabled: function( source ) {
+      return Evema.GetLocal( source, 'enabled' );
+    }
+  }
+};
+
+Power.Actions = {
+  'Init'   : Power.Init,
+  'Toggle' : Power.Toggle
+};
+
+return Power; } )();
+
+Evema.Modules[ "Grid" ] = ( function() {
+const Grid = {
+  'Instance': null,
+  'Context': null
+};
+
+Grid.Init = function() {
+  const that = Grid;
+
+  const instance = document.getElementById( 'e-grid' );
+
+  if ( instance === null ) {
+    console.error( 'Evema.Core.Grid.Init error' );
+    console.error( 'Can\'t find element "e-grid" in document' );
+    return;
+  }
+
+  that.Instance = instance;
+  that.Context = instance.getContext( '2d' );
+
+  Evema.SetLocal( that, 'Instance', that.Instance );
+  Evema.SetLocal( that, 'Context', that.Context );
+
+  that.Rebuild();
+};
+
+Grid.Rebuild = function() {
+  const that = Grid;
+
+  const instance = that.Instance;
+  if ( instance === null ) {
+    console.warn( 'Can\'t rebuild grid, the grid instance is null!' );
+    return;
+  }
+
+  const width = Evema.GetLocal( that, 'Width' );
+  const height = Evema.GetLocal( that, 'Height' );
+  const cellWidth = Evema.GetLocal( that, 'CellWidth' );
+  const cellHeight = Evema.GetLocal( that, 'CellHeight' );
+
+  instance.width = width * cellWidth;
+  instance.height = height * cellHeight;
+
+  that.Redraw();
+}
+
+Grid.Redraw = function() {
+  const that = Grid;
+
+  that.Clear();
+  that.Draw();
+}
+
+Grid.Clear = function() {
+  const that = Grid;
+
+  const instance = that.Instance;
+  if ( instance === null ) {
+    console.warn( 'Can\'t clear grid, the grid instance is null!' );
+    return;
+  }
+
+  const context = that.Context;
+  const backgroundColor = Evema.GetLocal( that, 'BackgroundColor' );
+  context.clearRect( 0, 0, instance.width, instance.height );
+  document.documentElement.style.setProperty( '--grid-background-color', backgroundColor );
+}
+
+Grid.Draw = function() {
+  const that = Grid;
+
+  const instance = that.Instance;
+  if ( instance === null ) {
+    console.warn( 'Can\'t draw grid, the grid instance is null!' );
+    return;
+  }
+
+  const context = that.Context;
+
+  const type = Evema.GetLocal( that, 'Type' );
+  const lineColor = Evema.GetLocal( that, 'LineColor' );
+  const cw = Evema.GetLocal( that, 'CellWidth' );
+  const ch = Evema.GetLocal( that, 'CellHeight' );
+  const width = Evema.GetLocal( that, 'Width' );
+  const height = Evema.GetLocal( that, 'Height' );
+  const ox = Evema.GetLocal( that, 'OffsetX' ) % cw;
+  const oy = Evema.GetLocal( that, 'OffsetY' ) % ch;
+
+  context.fillStyle = lineColor;
+  if ( type === 'pixel' ) {
+    // Draw one pixel on each cell in left-top corner
+    for ( let y = 0; y < height; y++ ) {
+      for ( let x = 0; x < width; x++ ) {
+        context.fillRect( 
+          cw * x + ox, 
+          ch * y + oy, 
+          1, 1 
+        );
+      }
+    }
+  } else {
+    console.warn( `Unknown draw type "${type}"` );
+  }
+}
+
+Grid.Options = {
+  Standard: {
+    Instance: null,
+    Context: null,
+    BackgroundColor: '#D3D1BB',
+    LineColor: '#000000',
+    CellWidth: 8,
+    CellHeight: 8,
+    Width: 100,
+    Height: 60,
+    Type: 'pixel',
+    OffsetX: 0,
+    OffsetY: 0
+  },
+  Current: {}
+};
+
+Grid.Actions = {
+  'Init'    : Grid.Init,
+  'Rebuild' : Grid.Rebuild,
+  'Redraw'  : Grid.Redraw,
+  'Clear'   : Grid.Clear,
+  'Draw'    : Grid.Draw
+};
+
+return Grid; } )();
+
+Evema.Modules[ "ContextMenu" ] = ( function() {
+const ContextMenu = {};
+
+ContextMenu.Instance = null;
+
+ContextMenu.Init = function() {
+  const that = ContextMenu;
+
+  const gridInstance = Evema.Get( 'Grid:Instance' );
+  if ( gridInstance === undefined ) {
+    console.warn( 'No grid instance' );
+    return;
+  }
+
+  window.addEventListener( 'contextmenu', function( e ) { 
+    e.preventDefault();
+  }, false );
+
+  window.addEventListener( 'click', function( e ) {
+    Evema.SetLocal( that, 'Visible', false );
+  }, false );
+
+  gridInstance.oncontextmenu = function( e ) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    // console.log( e );
+    Evema.SetLocal( that, 'Position', { x: e.x, y: e.y } );
+    Evema.SetLocal( that, 'Visible', true );
+  }
+
+  that.Instance = $( '.context-menu' )[ 0 ];
+  that.Instance.addEventListener( 'click', function( e ) {
+    e.stopPropagation();
+
+    // console.log( 'Context menu click' );
+  } );
+  Evema.SetLocal( that, 'Instance', that.Instance );
+}
+
+ContextMenu.Show = function() {
+  const that = ContextMenu;
+
+  Evema.SetLocal( that, "Visible", true );
+}
+
+ContextMenu.Hide = function() {
+  const that = ContextMenu;
+
+  Evema.SetLocal( that, "Visible", false );
+}
+
+ContextMenu.OnVisible = function( source, value ) {
+  if ( value ) {
+    const position = Evema.GetLocal( source, 'Position' );
+    source.Instance.style.left = `${position.x}px`;
+    source.Instance.style.top = `${position.y}px`;
+    $( source.Instance ).removeClass( 'hidden' );
+  } else {
+    $( source.Instance ).addClass( 'hidden' );
+  }
+}
+
+ContextMenu.Actions = {
+  'Init' : ContextMenu.Init,
+  'Show' : ContextMenu.Show,
+  'Hide' : ContextMenu.Hide
+};
+
+ContextMenu.Options = {
+  Standard: {
+    Instance: null,
+    Visible: false,
+    Position: { x: 0, y: 0 }
+  },
+  Current: {},
+  Setters: {
+    Visible: ContextMenu.OnVisible
+  }
+}
+
+return ContextMenu; } )();
+
+Evema.Modules[ "Schema" ] = ( function() {
+const Schema = {}
+
+Schema.Init = function() {
+
+};
+
+Schema.Actions = {
+  'Init' : Schema.Init
+};
+
+Schema.Options = {
+  Standard: {
+    
+  },
+  Current: {}
+};
+
+return Schema; } )();

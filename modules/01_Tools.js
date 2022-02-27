@@ -13,6 +13,7 @@ const Tools = {
 };
 
 Tools.Init = function() {
+  console.log('Tools.Init', this);
   const that = Tools;
 
   const panel = $( '.tools' )[ 0 ];

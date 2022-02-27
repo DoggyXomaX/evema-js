@@ -30,7 +30,7 @@ let _preload_ = function() {
     _img.src = _preload_images_[i];
     _img.onload = function() { 
       _preload_count_++; 
-      if (_preload_count_ >= _preload_images_.length) {
+      if (_preload_count_ >= _preload_images_.length) { 
         _preload_images_ = undefined;
         _preload_count_ = undefined;
         _preload_ = undefined;
